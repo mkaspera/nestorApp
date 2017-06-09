@@ -52,6 +52,8 @@
             this.tbJednostka = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbIloscPunktowPomiarowych = new System.Windows.Forms.TextBox();
+            this.btnZeruj = new System.Windows.Forms.Button();
+            this.btnZapisz = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).BeginInit();
@@ -99,7 +101,7 @@
             // 
             // btnPomiar
             // 
-            this.btnPomiar.Location = new System.Drawing.Point(15, 70);
+            this.btnPomiar.Location = new System.Drawing.Point(96, 70);
             this.btnPomiar.Name = "btnPomiar";
             this.btnPomiar.Size = new System.Drawing.Size(75, 23);
             this.btnPomiar.TabIndex = 7;
@@ -160,7 +162,7 @@
             this.dgvDanePomiaru.Location = new System.Drawing.Point(15, 99);
             this.dgvDanePomiaru.Name = "dgvDanePomiaru";
             this.dgvDanePomiaru.ReadOnly = true;
-            this.dgvDanePomiaru.Size = new System.Drawing.Size(637, 432);
+            this.dgvDanePomiaru.Size = new System.Drawing.Size(448, 432);
             this.dgvDanePomiaru.TabIndex = 12;
             // 
             // próbaDataGridViewTextBoxColumn
@@ -197,7 +199,7 @@
             // 
             // btnRaport
             // 
-            this.btnRaport.Location = new System.Drawing.Point(96, 70);
+            this.btnRaport.Location = new System.Drawing.Point(177, 70);
             this.btnRaport.Name = "btnRaport";
             this.btnRaport.Size = new System.Drawing.Size(75, 23);
             this.btnRaport.TabIndex = 13;
@@ -263,12 +265,34 @@
             this.tbIloscPunktowPomiarowych.TabIndex = 19;
             this.tbIloscPunktowPomiarowych.Text = "20";
             // 
+            // btnZeruj
+            // 
+            this.btnZeruj.Location = new System.Drawing.Point(15, 70);
+            this.btnZeruj.Name = "btnZeruj";
+            this.btnZeruj.Size = new System.Drawing.Size(75, 23);
+            this.btnZeruj.TabIndex = 20;
+            this.btnZeruj.Text = "Zeruj";
+            this.btnZeruj.UseVisualStyleBackColor = true;
+            this.btnZeruj.Click += new System.EventHandler(this.btnZeruj_Click);
+            // 
+            // btnZapisz
+            // 
+            this.btnZapisz.Location = new System.Drawing.Point(258, 70);
+            this.btnZapisz.Name = "btnZapisz";
+            this.btnZapisz.Size = new System.Drawing.Size(87, 23);
+            this.btnZapisz.TabIndex = 21;
+            this.btnZapisz.Text = "Zapisz pomiar";
+            this.btnZapisz.UseVisualStyleBackColor = true;
+            this.btnZapisz.Click += new System.EventHandler(this.btnZapisz_Click);
+            // 
             // PomiarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1048, 543);
+            this.Controls.Add(this.btnZapisz);
+            this.Controls.Add(this.btnZeruj);
             this.Controls.Add(this.tbIloscPunktowPomiarowych);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbJednostka);
@@ -320,5 +344,7 @@
         private System.Windows.Forms.TextBox tbJednostka;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbIloscPunktowPomiarowych;
+        private System.Windows.Forms.Button btnZeruj;
+        private System.Windows.Forms.Button btnZapisz;
     }
 }

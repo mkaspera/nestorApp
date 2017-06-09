@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Common\DataGridViewHelper.cs" />
     <Compile Include="Common\TabControlHelper.cs" />
+    <Compile Include="Configuration\ConfigurationParameter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +74,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabPages\ListaPomiarowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\ListaPomiarowForm.Designer.cs">
+      <DependentUpon>ListaPomiarowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\KonfiguracjaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +134,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TabPages\ListaPomiarowForm.resx">
+      <DependentUpon>ListaPomiarowForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\KonfiguracjaForm.resx">
       <DependentUpon>KonfiguracjaForm.cs</DependentUpon>
     </EmbeddedResource>

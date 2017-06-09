@@ -59,6 +59,16 @@ namespace NestorApplication.TabPages
             _mainForm.GotoReportTab();
         }
 
+        private void btnZeruj_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ReadData()
         {
             int count = 20;

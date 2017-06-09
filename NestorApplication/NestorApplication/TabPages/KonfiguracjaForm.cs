@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NestorApplication.Configuration;
+using System;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
@@ -10,9 +11,17 @@ namespace NestorApplication.TabPages
             InitializeComponent();
         }
 
+        public void SetFocus()
+        {
+            tbPortCOM.Focus();
+        }
+
         private void btnZapisz_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Zapis ", "Parametry konfiguracyjne");
+            ConfigurationParameter parameters = new ConfigurationParameter();
+            parameters.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text, tbDrogaStop.Text, tbTimeoutStop.Text);
+
+            MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
         }
     }
 }
