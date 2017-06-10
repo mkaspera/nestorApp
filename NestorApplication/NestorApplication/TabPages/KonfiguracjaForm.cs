@@ -1,14 +1,18 @@
-﻿using NestorApplication.Configuration;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
 {
     public partial class KonfiguracjaForm : Form
     {
-        public KonfiguracjaForm()
+        MainForm _mainForm;
+
+        public KonfiguracjaForm(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
+            _mainForm.ConfigurationParameter.Read();
+            AssignParameter();
         }
 
         public void SetFocus()
@@ -16,11 +20,20 @@ namespace NestorApplication.TabPages
             tbPortCOM.Focus();
         }
 
+        private void AssignParameter()
+        {
+            tbPortCOM.Text = _mainForm.ConfigurationParameter.PortCOM;
+            tbBaudrate.Text = _mainForm.ConfigurationParameter.Baudrate;
+            tbSkalaTensometr.Text = _mainForm.ConfigurationParameter.SkalaTensometr;
+            tbSkalaDroga.Text = _mainForm.ConfigurationParameter.SkalaDroga;
+            tbCzuloscStart.Text = _mainForm.ConfigurationParameter.CzuloscStart;
+            tbDrogaStop.Text = _mainForm.ConfigurationParameter.DrogaStop;
+            tbTimeoutStop.Text = _mainForm.ConfigurationParameter.TimeoutStop;
+        }
+
         private void btnZapisz_Click(object sender, EventArgs e)
         {
-            ConfigurationParameter parameters = new ConfigurationParameter();
-            parameters.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text, tbDrogaStop.Text, tbTimeoutStop.Text);
-
+            _mainForm.ConfigurationParameter.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text, tbDrogaStop.Text, tbTimeoutStop.Text);
             MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
         }
     }

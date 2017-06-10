@@ -3,14 +3,17 @@ using NestorApplication.TabPages;
 using NestorRepository.Entities;
 using System.Windows.Forms;
 using System;
+using NestorRepository;
+using NestorApplication.Configuration;
 
 namespace NestorApplication
 {
     public partial class MainForm : Form
     {
         public Pomiar Pomiar { get; set; }
+        public ConfigurationParameter ConfigurationParameter { get; set; }
 
-        KonfiguracjaForm _frmKonfiguracja = new KonfiguracjaForm();
+        KonfiguracjaForm _frmKonfiguracja;
         KlienciForm _frmKlienci = new KlienciForm();
         ProduktyForm _frmProdukty = new ProduktyForm();
         SprezynyForm _frmSprezyny = new SprezynyForm();
@@ -22,6 +25,9 @@ namespace NestorApplication
         public MainForm()
         {
             InitializeComponent();
+            ConfigurationParameter = new ConfigurationParameter();
+            DatabaseHelper.CreateDatabase();
+            _frmKonfiguracja = new KonfiguracjaForm(this);
             _frmPomiar = new PomiarForm(this);
             _frmRaport = new RaportForm(this);
             InitTabs();
