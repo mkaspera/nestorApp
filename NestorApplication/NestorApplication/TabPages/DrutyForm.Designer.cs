@@ -30,17 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lbDruty = new System.Windows.Forms.Label();
-            this.dgvSprezyny = new System.Windows.Forms.DataGridView();
-            this.średnicaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDruty = new System.Windows.Forms.DataGridView();
             this.drutBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnEdytuj = new System.Windows.Forms.Button();
             this.btnUsun = new System.Windows.Forms.Button();
+            this.btnZapisz = new System.Windows.Forms.Button();
             this.sprezynaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.produktBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.klientBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Dostawca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSprezyny)).BeginInit();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nazwaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.srednicaTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dostawcaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDruty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sprezynaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produktBindingSource)).BeginInit();
@@ -56,33 +59,28 @@
             this.lbDruty.TabIndex = 0;
             this.lbDruty.Text = "Lista parametrów drutów:";
             // 
-            // dgvSprezyny
+            // dgvDruty
             // 
-            this.dgvSprezyny.AllowUserToAddRows = false;
-            this.dgvSprezyny.AllowUserToDeleteRows = false;
-            this.dgvSprezyny.AllowUserToOrderColumns = true;
-            this.dgvSprezyny.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvDruty.AllowUserToAddRows = false;
+            this.dgvDruty.AllowUserToDeleteRows = false;
+            this.dgvDruty.AllowUserToOrderColumns = true;
+            this.dgvDruty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvSprezyny.AutoGenerateColumns = false;
-            this.dgvSprezyny.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSprezyny.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.średnicaDataGridViewTextBoxColumn,
-            this.Dostawca});
-            this.dgvSprezyny.DataSource = this.drutBindingSource;
-            this.dgvSprezyny.Location = new System.Drawing.Point(12, 34);
-            this.dgvSprezyny.Name = "dgvSprezyny";
-            this.dgvSprezyny.ReadOnly = true;
-            this.dgvSprezyny.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvSprezyny.Size = new System.Drawing.Size(1060, 388);
-            this.dgvSprezyny.TabIndex = 1;
-            // 
-            // średnicaDataGridViewTextBoxColumn
-            // 
-            this.średnicaDataGridViewTextBoxColumn.DataPropertyName = "Średnica";
-            this.średnicaDataGridViewTextBoxColumn.HeaderText = "Średnica";
-            this.średnicaDataGridViewTextBoxColumn.Name = "średnicaDataGridViewTextBoxColumn";
-            this.średnicaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dgvDruty.AutoGenerateColumns = false;
+            this.dgvDruty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDruty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.nazwaDataGridViewTextBoxColumn,
+            this.srednicaTextBoxColumn,
+            this.dostawcaDataGridViewTextBoxColumn});
+            this.dgvDruty.DataSource = this.drutBindingSource;
+            this.dgvDruty.Location = new System.Drawing.Point(12, 34);
+            this.dgvDruty.Name = "dgvDruty";
+            this.dgvDruty.ReadOnly = true;
+            this.dgvDruty.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvDruty.Size = new System.Drawing.Size(1060, 388);
+            this.dgvDruty.TabIndex = 1;
             // 
             // drutBindingSource
             // 
@@ -121,6 +119,20 @@
             this.btnUsun.UseVisualStyleBackColor = true;
             this.btnUsun.Click += new System.EventHandler(this.btnUsun_Click);
             // 
+            // btnZapisz
+            // 
+            this.btnZapisz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZapisz.Enabled = false;
+            this.btnZapisz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnZapisz.ForeColor = System.Drawing.Color.Red;
+            this.btnZapisz.Location = new System.Drawing.Point(256, 428);
+            this.btnZapisz.Name = "btnZapisz";
+            this.btnZapisz.Size = new System.Drawing.Size(75, 23);
+            this.btnZapisz.TabIndex = 8;
+            this.btnZapisz.Text = "Zapisz";
+            this.btnZapisz.UseVisualStyleBackColor = true;
+            this.btnZapisz.Click += new System.EventHandler(this.btnZapisz_Click);
+            // 
             // sprezynaBindingSource
             // 
             this.sprezynaBindingSource.DataSource = typeof(NestorRepository.Entities.Sprezyna);
@@ -133,12 +145,34 @@
             // 
             this.klientBindingSource.DataSource = typeof(NestorRepository.Entities.Klient);
             // 
-            // Dostawca
+            // Id
             // 
-            this.Dostawca.DataPropertyName = "Dostawca";
-            this.Dostawca.HeaderText = "Dostawca";
-            this.Dostawca.Name = "Dostawca";
-            this.Dostawca.ReadOnly = true;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // nazwaDataGridViewTextBoxColumn
+            // 
+            this.nazwaDataGridViewTextBoxColumn.DataPropertyName = "Nazwa";
+            this.nazwaDataGridViewTextBoxColumn.HeaderText = "Nazwa";
+            this.nazwaDataGridViewTextBoxColumn.Name = "nazwaDataGridViewTextBoxColumn";
+            this.nazwaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // srednicaTextBoxColumn
+            // 
+            this.srednicaTextBoxColumn.DataPropertyName = "srednica";
+            this.srednicaTextBoxColumn.HeaderText = "Średnica";
+            this.srednicaTextBoxColumn.Name = "srednicaTextBoxColumn";
+            this.srednicaTextBoxColumn.ReadOnly = true;
+            // 
+            // dostawcaDataGridViewTextBoxColumn
+            // 
+            this.dostawcaDataGridViewTextBoxColumn.DataPropertyName = "Dostawca";
+            this.dostawcaDataGridViewTextBoxColumn.HeaderText = "Dostawca";
+            this.dostawcaDataGridViewTextBoxColumn.Name = "dostawcaDataGridViewTextBoxColumn";
+            this.dostawcaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // DrutyForm
             // 
@@ -146,15 +180,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.btnZapisz);
             this.Controls.Add(this.btnUsun);
             this.Controls.Add(this.btnEdytuj);
             this.Controls.Add(this.btnDodaj);
-            this.Controls.Add(this.dgvSprezyny);
+            this.Controls.Add(this.dgvDruty);
             this.Controls.Add(this.lbDruty);
             this.Name = "DrutyForm";
             this.Text = "DrutyForm";
             this.Load += new System.EventHandler(this.DrutyForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSprezyny)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDruty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drutBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sprezynaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.produktBindingSource)).EndInit();
@@ -167,15 +202,18 @@
         #endregion
 
         private System.Windows.Forms.Label lbDruty;
-        private System.Windows.Forms.DataGridView dgvSprezyny;
+        private System.Windows.Forms.DataGridView dgvDruty;
         private System.Windows.Forms.Button btnDodaj;
         private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.BindingSource klientBindingSource;
         private System.Windows.Forms.BindingSource produktBindingSource;
         private System.Windows.Forms.BindingSource sprezynaBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn średnicaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource drutBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dostawca;
+        private System.Windows.Forms.Button btnZapisz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn srednicaTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dostawcaDataGridViewTextBoxColumn;
     }
 }

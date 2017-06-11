@@ -1,16 +1,16 @@
 ﻿using NestorApplication.Common;
 using NestorRepository;
-using NestorRepository.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
 {
     public partial class DrutyForm : Form
     {
-        List<Drut> _druty = new List<Drut>();
-        BindingSource _bindingSource = new BindingSource();
+        private DataTable _dataTable;
+        private List<int> recordsToDeleted = new List<int>();
 
         public DrutyForm()
         {
@@ -19,7 +19,7 @@ namespace NestorApplication.TabPages
 
         public void SetFocus()
         {
-            dgvSprezyny.Focus();
+            dgvDruty.Focus();
         }
 
         private void DrutyForm_Load(object sender, EventArgs e)
@@ -29,32 +29,29 @@ namespace NestorApplication.TabPages
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            dgvSprezyny.ReadOnly = false;
-            _bindingSource.Add(new Drut { Średnica = 0, Dostawca = "Dostawca" });
-            DataGridViewHelper.SelectLastCellToEdit(dgvSprezyny);
+            DataGridViewHelper.Add(_dataTable, dgvDruty, btnZapisz);
         }
 
         private void btnEdytuj_Click(object sender, EventArgs e)
         {
-            dgvSprezyny.ReadOnly = false;
-            DataGridViewHelper.EditRow(dgvSprezyny);
+            DataGridViewHelper.Edit(dgvDruty, btnZapisz);
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteRow(dgvSprezyny);
+            DataGridViewHelper.Delete(dgvDruty, recordsToDeleted, btnZapisz);
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.Save(dgvDruty, "Druty", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddDrut, DatabaseHelper.UpdateDrut);
         }
 
         private void LoadData()
         {
-            _druty = new Druty().GetData();
-            foreach (var drut in _druty)
-            {
-                _bindingSource.Add(drut);
-            }
-
-            dgvSprezyny.DataSource = _bindingSource;
-            DataGridViewHelper.SetGridProperties(dgvSprezyny);
+            _dataTable = DatabaseHelper.ReadDataTable(Druty.SelectQuery);
+            dgvDruty.DataSource = _dataTable;
+            DataGridViewHelper.SetGridProperties(dgvDruty);
         }
     }
 }

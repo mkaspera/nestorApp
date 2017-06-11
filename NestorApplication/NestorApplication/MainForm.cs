@@ -14,10 +14,10 @@ namespace NestorApplication
         public ConfigurationParameter ConfigurationParameter { get; set; }
 
         KonfiguracjaForm _frmKonfiguracja;
-        KlienciForm _frmKlienci = new KlienciForm();
-        ProduktyForm _frmProdukty = new ProduktyForm();
-        SprezynyForm _frmSprezyny = new SprezynyForm();
-        DrutyForm _frmDruty = new DrutyForm();
+        KlienciForm _frmKlienci;
+        ProduktyForm _frmProdukty;
+        SprezynyForm _frmSprezyny;
+        DrutyForm _frmDruty;
         PomiarForm _frmPomiar;
         ListaPomiarowForm _frmListaPomiarow = new ListaPomiarowForm();
         RaportForm _frmRaport;
@@ -28,6 +28,10 @@ namespace NestorApplication
             ConfigurationParameter = new ConfigurationParameter();
             DatabaseHelper.CreateDatabase();
             _frmKonfiguracja = new KonfiguracjaForm(this);
+            _frmKlienci = new KlienciForm();
+            _frmProdukty = new ProduktyForm();
+            _frmSprezyny = new SprezynyForm();
+            _frmDruty = new DrutyForm();
             _frmPomiar = new PomiarForm(this);
             _frmRaport = new RaportForm(this);
             InitTabs();

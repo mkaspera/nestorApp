@@ -1,16 +1,31 @@
 ﻿using NestorRepository.Entities;
 using System.Collections.Generic;
+using System.Data;
 
 namespace NestorRepository
 {
     public class Produkty
     {
+        public const string SelectQuery = "SELECT id, nazwa, dlugosc, szerokosc, wysokosc, typ FROM Produkty";
+
         public List<Produkt> GetData()
         {
             List<Produkt> produkty = new List<Produkt>();
-            produkty.Add(new Produkt { Nazwa = "Produkt 1", Długość = 1, Szerokość = 1, Wysokość = 1, Typ = "Materac 1" });
-            produkty.Add(new Produkt { Nazwa = "Produkt 2", Długość = 2, Szerokość = 2, Wysokość = 2, Typ = "Materac 2" });
-            produkty.Add(new Produkt { Nazwa = "Produkt 3", Długość = 3, Szerokość = 3, Wysokość = 3, Typ = "Materac 3" });
+
+            DataTable dataTable = DatabaseHelper.ReadDataTable(SelectQuery);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                produkty.Add(new Produkt
+                {
+                    Id = int.Parse(row.ItemArray[0].ToString()),
+                    Nazwa = row.ItemArray[1].ToString(),
+                    Długość = int.Parse(row.ItemArray[2].ToString()),
+                    Szerokość = int.Parse(row.ItemArray[3].ToString()),
+                    Wysokość = int.Parse(row.ItemArray[4].ToString()),
+                    Typ = row.ItemArray[5].ToString()
+                });
+            }
+
             return produkty;
         }
     }

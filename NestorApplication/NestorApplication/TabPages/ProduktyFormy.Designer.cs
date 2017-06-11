@@ -34,13 +34,15 @@
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnEdytuj = new System.Windows.Forms.Button();
             this.btnUsun = new System.Windows.Forms.Button();
-            this.nazwaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.długośćDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.szerokośćDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wysokośćDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnZapisz = new System.Windows.Forms.Button();
             this.produktBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.klientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nazwaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dlugoscDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.szerokoscDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wysokoscDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdukty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produktBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.klientBindingSource)).BeginInit();
@@ -59,17 +61,17 @@
             // 
             this.dgvProdukty.AllowUserToAddRows = false;
             this.dgvProdukty.AllowUserToDeleteRows = false;
-            this.dgvProdukty.AllowUserToOrderColumns = true;
             this.dgvProdukty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProdukty.AutoGenerateColumns = false;
             this.dgvProdukty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdukty.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.nazwaDataGridViewTextBoxColumn,
-            this.długośćDataGridViewTextBoxColumn,
-            this.szerokośćDataGridViewTextBoxColumn,
-            this.wysokośćDataGridViewTextBoxColumn,
+            this.dlugoscDataGridViewTextBoxColumn,
+            this.szerokoscDataGridViewTextBoxColumn,
+            this.wysokoscDataGridViewTextBoxColumn,
             this.typDataGridViewTextBoxColumn});
             this.dgvProdukty.DataSource = this.produktBindingSource;
             this.dgvProdukty.Location = new System.Drawing.Point(12, 34);
@@ -112,40 +114,18 @@
             this.btnUsun.UseVisualStyleBackColor = true;
             this.btnUsun.Click += new System.EventHandler(this.btnUsun_Click);
             // 
-            // nazwaDataGridViewTextBoxColumn
+            // btnZapisz
             // 
-            this.nazwaDataGridViewTextBoxColumn.DataPropertyName = "Nazwa";
-            this.nazwaDataGridViewTextBoxColumn.HeaderText = "Nazwa";
-            this.nazwaDataGridViewTextBoxColumn.Name = "nazwaDataGridViewTextBoxColumn";
-            this.nazwaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // długośćDataGridViewTextBoxColumn
-            // 
-            this.długośćDataGridViewTextBoxColumn.DataPropertyName = "Długość";
-            this.długośćDataGridViewTextBoxColumn.HeaderText = "Długość";
-            this.długośćDataGridViewTextBoxColumn.Name = "długośćDataGridViewTextBoxColumn";
-            this.długośćDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // szerokośćDataGridViewTextBoxColumn
-            // 
-            this.szerokośćDataGridViewTextBoxColumn.DataPropertyName = "Szerokość";
-            this.szerokośćDataGridViewTextBoxColumn.HeaderText = "Szerokość";
-            this.szerokośćDataGridViewTextBoxColumn.Name = "szerokośćDataGridViewTextBoxColumn";
-            this.szerokośćDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // wysokośćDataGridViewTextBoxColumn
-            // 
-            this.wysokośćDataGridViewTextBoxColumn.DataPropertyName = "Wysokość";
-            this.wysokośćDataGridViewTextBoxColumn.HeaderText = "Wysokość";
-            this.wysokośćDataGridViewTextBoxColumn.Name = "wysokośćDataGridViewTextBoxColumn";
-            this.wysokośćDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typDataGridViewTextBoxColumn
-            // 
-            this.typDataGridViewTextBoxColumn.DataPropertyName = "Typ";
-            this.typDataGridViewTextBoxColumn.HeaderText = "Typ";
-            this.typDataGridViewTextBoxColumn.Name = "typDataGridViewTextBoxColumn";
-            this.typDataGridViewTextBoxColumn.ReadOnly = true;
+            this.btnZapisz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnZapisz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnZapisz.ForeColor = System.Drawing.Color.Red;
+            this.btnZapisz.Location = new System.Drawing.Point(256, 428);
+            this.btnZapisz.Name = "btnZapisz";
+            this.btnZapisz.Size = new System.Drawing.Size(75, 23);
+            this.btnZapisz.TabIndex = 6;
+            this.btnZapisz.Text = "Zapisz";
+            this.btnZapisz.UseVisualStyleBackColor = true;
+            this.btnZapisz.Click += new System.EventHandler(this.btnZapisz_Click);
             // 
             // produktBindingSource
             // 
@@ -155,12 +135,56 @@
             // 
             this.klientBindingSource.DataSource = typeof(NestorRepository.Entities.Klient);
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // nazwaDataGridViewTextBoxColumn
+            // 
+            this.nazwaDataGridViewTextBoxColumn.DataPropertyName = "Nazwa";
+            this.nazwaDataGridViewTextBoxColumn.HeaderText = "Nazwa";
+            this.nazwaDataGridViewTextBoxColumn.Name = "nazwaDataGridViewTextBoxColumn";
+            this.nazwaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dlugoscDataGridViewTextBoxColumn
+            // 
+            this.dlugoscDataGridViewTextBoxColumn.DataPropertyName = "Dlugosc";
+            this.dlugoscDataGridViewTextBoxColumn.HeaderText = "Długość";
+            this.dlugoscDataGridViewTextBoxColumn.Name = "dlugoscDataGridViewTextBoxColumn";
+            this.dlugoscDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // szerokoscDataGridViewTextBoxColumn
+            // 
+            this.szerokoscDataGridViewTextBoxColumn.DataPropertyName = "Szerokosc";
+            this.szerokoscDataGridViewTextBoxColumn.HeaderText = "Szerokość";
+            this.szerokoscDataGridViewTextBoxColumn.Name = "szerokoscDataGridViewTextBoxColumn";
+            this.szerokoscDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // wysokoscDataGridViewTextBoxColumn
+            // 
+            this.wysokoscDataGridViewTextBoxColumn.DataPropertyName = "Wysokosc";
+            this.wysokoscDataGridViewTextBoxColumn.HeaderText = "Wysokość";
+            this.wysokoscDataGridViewTextBoxColumn.Name = "wysokoscDataGridViewTextBoxColumn";
+            this.wysokoscDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typDataGridViewTextBoxColumn
+            // 
+            this.typDataGridViewTextBoxColumn.DataPropertyName = "Typ";
+            this.typDataGridViewTextBoxColumn.HeaderText = "Typ";
+            this.typDataGridViewTextBoxColumn.Name = "typDataGridViewTextBoxColumn";
+            this.typDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ProduktyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1084, 461);
+            this.Controls.Add(this.btnZapisz);
             this.Controls.Add(this.btnUsun);
             this.Controls.Add(this.btnEdytuj);
             this.Controls.Add(this.btnDodaj);
@@ -185,11 +209,13 @@
         private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.BindingSource klientBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn długośćDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn szerokośćDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn wysokośćDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource produktBindingSource;
+        private System.Windows.Forms.Button btnZapisz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nazwaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dlugoscDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn szerokoscDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wysokoscDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typDataGridViewTextBoxColumn;
     }
 }

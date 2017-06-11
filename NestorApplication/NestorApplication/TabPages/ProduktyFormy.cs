@@ -1,16 +1,16 @@
 ﻿using NestorApplication.Common;
 using NestorRepository;
-using NestorRepository.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
 {
     public partial class ProduktyForm : Form
     {
-        List<Produkt> _produkty = new List<Produkt>();
-        BindingSource _bindingSource = new BindingSource();
+        private DataTable _dataTable;
+        private List<int> recordsToDeleted = new List<int>();
 
         public ProduktyForm()
         {
@@ -29,31 +29,28 @@ namespace NestorApplication.TabPages
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            dgvProdukty.ReadOnly = false;
-            _bindingSource.Add(new Produkt { Nazwa = "", Długość = 0, Szerokość = 0, Wysokość = 0, Typ = "Materac" });
-            DataGridViewHelper.SelectLastCellToEdit(dgvProdukty);
+            DataGridViewHelper.Add(_dataTable, dgvProdukty, btnZapisz);
         }
 
         private void btnEdytuj_Click(object sender, EventArgs e)
         {
-            dgvProdukty.ReadOnly = false;
-            DataGridViewHelper.EditRow(dgvProdukty);
+            DataGridViewHelper.Edit(dgvProdukty, btnZapisz);
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteRow(dgvProdukty);
+            DataGridViewHelper.Delete(dgvProdukty, recordsToDeleted, btnZapisz);
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.Save(dgvProdukty, "Produkty", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddProdukt, DatabaseHelper.UpdateProdukt);
         }
 
         private void LoadData()
         {
-            _produkty = new Produkty().GetData();
-            foreach (var produkt in _produkty)
-            {
-                _bindingSource.Add(produkt);
-            }
-
-            dgvProdukty.DataSource = _bindingSource;
+            _dataTable = DatabaseHelper.ReadDataTable(Produkty.SelectQuery);
+            dgvProdukty.DataSource = _dataTable;
             DataGridViewHelper.SetGridProperties(dgvProdukty);
         }
     }

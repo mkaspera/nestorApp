@@ -1,16 +1,16 @@
 ﻿using NestorApplication.Common;
 using NestorRepository;
-using NestorRepository.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
 {
     public partial class SprezynyForm : Form
     {
-        List<Sprezyna> _sprezyny = new List<Sprezyna>();
-        BindingSource _bindingSource = new BindingSource();
+        private DataTable _dataTable;
+        private List<int> recordsToDeleted = new List<int>();
 
         public SprezynyForm()
         {
@@ -29,31 +29,28 @@ namespace NestorApplication.TabPages
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            dgvSprezyny.ReadOnly = false;
-            _bindingSource.Add(new Sprezyna { WysokośćPoczątkowa = 0, Średnica = 0, LiczbaZwoi = 0 });
-            DataGridViewHelper.SelectLastCellToEdit(dgvSprezyny);
+            DataGridViewHelper.Add(_dataTable, dgvSprezyny, btnZapisz);
         }
 
         private void btnEdytuj_Click(object sender, EventArgs e)
         {
-            dgvSprezyny.ReadOnly = false;
-            DataGridViewHelper.EditRow(dgvSprezyny);
+            DataGridViewHelper.Edit(dgvSprezyny, btnZapisz);
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteRow(dgvSprezyny);
+            DataGridViewHelper.Delete(dgvSprezyny, recordsToDeleted, btnZapisz);
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.Save(dgvSprezyny, "Sprezyny", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddSprezyna, DatabaseHelper.UpdateSprezyna);
         }
 
         private void LoadData()
         {
-            _sprezyny = new Sprezyny().GetData();
-            foreach (var sprezyna in _sprezyny)
-            {
-                _bindingSource.Add(sprezyna);
-            }
-
-            dgvSprezyny.DataSource = _bindingSource;
+            _dataTable = DatabaseHelper.ReadDataTable(Sprezyny.SelectQuery);
+            dgvSprezyny.DataSource = _dataTable;
             DataGridViewHelper.SetGridProperties(dgvSprezyny);
         }
     }

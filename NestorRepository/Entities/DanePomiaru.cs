@@ -3,7 +3,7 @@
     public class DanePomiaru
     {
         public int Próba { get; set; }
-        public int Siła { get; set; }
-        public int Ugięcie { get; set; }
+        public double Siła { get; set; }
+        public double Ugięcie { get; set; }
     }
 }

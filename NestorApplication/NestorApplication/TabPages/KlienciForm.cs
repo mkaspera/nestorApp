@@ -1,16 +1,16 @@
 ﻿using NestorApplication.Common;
 using NestorRepository;
-using NestorRepository.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
 {
     public partial class KlienciForm : Form
     {
-        List<Klient> _klienci = new List<Klient>();
-        BindingSource _bindingSource = new BindingSource();
+        private DataTable _dataTable;
+        private List<int> recordsToDeleted = new List<int>();
 
         public KlienciForm()
         {
@@ -29,31 +29,28 @@ namespace NestorApplication.TabPages
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            dgvKlienci.ReadOnly = false;
-            _bindingSource.Add(new Klient { Nazwa = "", Logo = "" });
-            DataGridViewHelper.SelectLastCellToEdit(dgvKlienci);
+            DataGridViewHelper.Add(_dataTable, dgvKlienci, btnZapisz);
         }
 
         private void btnEdytuj_Click(object sender, EventArgs e)
         {
-            dgvKlienci.ReadOnly = false;
-            dgvKlienci.BeginEdit(true);
+            DataGridViewHelper.Edit(dgvKlienci, btnZapisz);
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteRow(dgvKlienci);
+            DataGridViewHelper.Delete(dgvKlienci, recordsToDeleted, btnZapisz);
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.Save(dgvKlienci, "Klienci", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddKlient, DatabaseHelper.UpdateKlient);
         }
 
         private void LoadData()
         {
-            _klienci = new Klienci().GetData();
-            foreach (var klient in _klienci)
-            {
-                _bindingSource.Add(klient);
-            }
-
-            dgvKlienci.DataSource = _bindingSource;
+            _dataTable = DatabaseHelper.ReadDataTable(Klienci.SelectQuery);
+            dgvKlienci.DataSource = _dataTable;
             DataGridViewHelper.SetGridProperties(dgvKlienci);
         }
     }

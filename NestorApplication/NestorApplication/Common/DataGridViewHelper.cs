@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NestorRepository;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NestorApplication.Common
@@ -15,32 +18,80 @@ namespace NestorApplication.Common
             }
         }
 
-        public static void SelectLastCellToEdit(DataGridView grid)
+        public static void Add(DataTable dataTable, DataGridView grid, Button btnZapisz)
         {
-            grid.Refresh();
+            dataTable.Rows.Add();
+            grid.ReadOnly = false;
+            grid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             grid.Rows[grid.Rows.Count - 1].Selected = true;
 
-            DataGridViewCell cell = grid.Rows[grid.Rows.Count - 1].Cells[0];
+            DataGridViewCell cell = grid.Rows[grid.Rows.Count - 1].Cells[1];
             grid.CurrentCell = cell;
             grid.BeginEdit(true);
+
+            btnZapisz.Enabled = true;
         }
 
-        public static void DeleteRow(DataGridView grid)
+        public static void Edit(DataGridView grid, Button btnZapisz)
         {
+            grid.ReadOnly = false;
+            grid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            grid.BeginEdit(true);
+            btnZapisz.Enabled = true;
+        }
+
+        public static void Delete(DataGridView grid, List<int> recordsToDeleted, Button btnZapisz)
+        {
+            int id = -1;
             if (grid.SelectedRows.Count > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("Czy na pewno usunąć zaznaczony rekord ?", "Usuwanie danych", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
                     grid.Rows.RemoveAt(grid.SelectedRows[0].Index);
                     grid.Refresh();
                 }
             }
+           
+            if (id >= 0)
+            {
+                recordsToDeleted.Add(id);
+            }
+
+            btnZapisz.Enabled = true;
         }
 
-        public static void EditRow(DataGridView grid)
+        public static void Save(DataGridView grid, string tableName, DataTable dataTable, List<int> recordsToDeleted, Button btnZapisz, Action<DataRow> add, Action<DataRow> update)
         {
-            grid.BeginEdit(true);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                switch (row.RowState)
+                {
+                    case DataRowState.Added:
+                        add.Invoke(row);
+                        row.AcceptChanges();
+                        break;
+
+                    case DataRowState.Modified:
+                        update.Invoke(row);
+                        row.AcceptChanges();
+                        break;
+                }
+            }
+
+            foreach (int id in recordsToDeleted)
+            {
+                DatabaseHelper.DeleteRecord(tableName, id);
+            }
+
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.Refresh();
+            grid.ReadOnly = true;
+
+            btnZapisz.Enabled = false;
+
+            MessageBox.Show("Pomyślnie zapisano zmiany.", "Zapis danych");
         }
     }
 }

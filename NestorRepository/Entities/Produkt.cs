@@ -2,6 +2,7 @@
 {
     public class Produkt
     {
+        public int Id { get; set; }
         public string Nazwa { get; set; }
         public int Długość { get; set; }
         public int Szerokość { get; set; }
