@@ -54,9 +54,15 @@
             this.tbIloscPunktowPomiarowych = new System.Windows.Forms.TextBox();
             this.btnZeruj = new System.Windows.Forms.Button();
             this.btnZapisz = new System.Windows.Forms.Button();
+            this.textBoxNacisk = new System.Windows.Forms.TextBox();
+            this.textBoxDroga = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -159,10 +165,10 @@
             this.ugięcieDataGridViewTextBoxColumn,
             this.Procent});
             this.dgvDanePomiaru.DataSource = this.danePomiaruBindingSource;
-            this.dgvDanePomiaru.Location = new System.Drawing.Point(15, 99);
+            this.dgvDanePomiaru.Location = new System.Drawing.Point(15, 125);
             this.dgvDanePomiaru.Name = "dgvDanePomiaru";
             this.dgvDanePomiaru.ReadOnly = true;
-            this.dgvDanePomiaru.Size = new System.Drawing.Size(448, 432);
+            this.dgvDanePomiaru.Size = new System.Drawing.Size(448, 406);
             this.dgvDanePomiaru.TabIndex = 12;
             // 
             // próbaDataGridViewTextBoxColumn
@@ -285,12 +291,62 @@
             this.btnZapisz.UseVisualStyleBackColor = true;
             this.btnZapisz.Click += new System.EventHandler(this.btnZapisz_Click);
             // 
+            // textBoxNacisk
+            // 
+            this.textBoxNacisk.AcceptsReturn = true;
+            this.textBoxNacisk.Location = new System.Drawing.Point(100, 30);
+            this.textBoxNacisk.Name = "textBoxNacisk";
+            this.textBoxNacisk.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNacisk.TabIndex = 22;
+            // 
+            // textBoxDroga
+            // 
+            this.textBoxDroga.AcceptsReturn = true;
+            this.textBoxDroga.Location = new System.Drawing.Point(100, 63);
+            this.textBoxDroga.Name = "textBoxDroga";
+            this.textBoxDroga.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDroga.TabIndex = 23;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(54, 37);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Nacisk";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(27, 70);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Przesunięcie";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBoxDroga);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.textBoxNacisk);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(651, 101);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 106);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Live View";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
             // PomiarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1048, 543);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnZapisz);
             this.Controls.Add(this.btnZeruj);
             this.Controls.Add(this.tbIloscPunktowPomiarowych);
@@ -315,6 +371,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,5 +404,10 @@
         private System.Windows.Forms.TextBox tbIloscPunktowPomiarowych;
         private System.Windows.Forms.Button btnZeruj;
         private System.Windows.Forms.Button btnZapisz;
+        private System.Windows.Forms.TextBox textBoxNacisk;
+        private System.Windows.Forms.TextBox textBoxDroga;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -13,6 +13,8 @@ namespace NestorApplication
         public Pomiar Pomiar { get; set; }
         public ConfigurationParameter ConfigurationParameter { get; set; }
 
+        Sensor _sensor = new Sensor();
+
         KonfiguracjaForm _frmKonfiguracja;
         KlienciForm _frmKlienci;
         ProduktyForm _frmProdukty;
@@ -35,6 +37,13 @@ namespace NestorApplication
             _frmPomiar = new PomiarForm(this);
             _frmRaport = new RaportForm(this);
             InitTabs();
+
+            _sensor.ComPort = ConfigurationParameter.PortCOM;
+
+            //jakiś tryparse chyba trzeba 
+            _sensor.mySerialPort.BaudRate = Convert.ToInt32(ConfigurationParameter.Baudrate);
+            _sensor.Open();
+            _sensor.Form = _frmPomiar;
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
