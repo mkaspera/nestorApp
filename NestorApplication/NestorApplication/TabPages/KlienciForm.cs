@@ -9,11 +9,13 @@ namespace NestorApplication.TabPages
 {
     public partial class KlienciForm : Form
     {
+        MainForm _mainForm;
         private DataTable _dataTable;
         private List<int> recordsToDeleted = new List<int>();
 
-        public KlienciForm()
+        public KlienciForm(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
         }
 
@@ -45,6 +47,7 @@ namespace NestorApplication.TabPages
         private void btnZapisz_Click(object sender, EventArgs e)
         {
             DataGridViewHelper.Save(dgvKlienci, "Klienci", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddKlient, DatabaseHelper.UpdateKlient);
+            _mainForm.RefreshListKlienci();
         }
 
         private void LoadData()

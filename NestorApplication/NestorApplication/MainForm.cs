@@ -5,45 +5,125 @@ using System.Windows.Forms;
 using System;
 using NestorRepository;
 using NestorApplication.Configuration;
+using System.Collections.Generic;
+using NestorApplication.Sensor;
 
 namespace NestorApplication
 {
     public partial class MainForm : Form
     {
-        public Pomiar Pomiar { get; set; }
         public ConfigurationParameter ConfigurationParameter { get; set; }
+        public Pomiar Pomiar { get; set; }
+        public DataEntryProcessor Processor { get; set; }
 
-        Sensor _sensor = new Sensor();
+        public List<Klient> Klienci = new List<Klient>();
+        public List<Produkt> Produkty = new List<Produkt>();
+        public List<Sprezyna> Sprezyny = new List<Sprezyna>();
+        public List<Drut> Druty = new List<Drut>();
 
-        KonfiguracjaForm _frmKonfiguracja;
-        KlienciForm _frmKlienci;
-        ProduktyForm _frmProdukty;
-        SprezynyForm _frmSprezyny;
-        DrutyForm _frmDruty;
-        PomiarForm _frmPomiar;
-        ListaPomiarowForm _frmListaPomiarow = new ListaPomiarowForm();
-        RaportForm _frmRaport;
+        private KonfiguracjaForm _frmKonfiguracja;
+        private KlienciForm _frmKlienci;
+        private ProduktyForm _frmProdukty;
+        private SprezynyForm _frmSprezyny;
+        private DrutyForm _frmDruty;
+        private PomiarForm _frmPomiar;
+        private ListaPomiarowForm _frmListaPomiarow;
+        private RaportForm _frmRaport;
+
+        private Sensor.Sensor _sensor;
 
         public MainForm()
         {
             InitializeComponent();
-            ConfigurationParameter = new ConfigurationParameter();
             DatabaseHelper.CreateDatabase();
+
+            ConfigurationParameter = new ConfigurationParameter();
+            Klienci = new Klienci().GetData();
+            Produkty = new Produkty().GetData();
+            Sprezyny = new Sprezyny().GetData();
+            Druty = new Druty().GetData();
+
             _frmKonfiguracja = new KonfiguracjaForm(this);
-            _frmKlienci = new KlienciForm();
-            _frmProdukty = new ProduktyForm();
-            _frmSprezyny = new SprezynyForm();
-            _frmDruty = new DrutyForm();
+            _frmKlienci = new KlienciForm(this);
+            _frmProdukty = new ProduktyForm(this);
+            _frmSprezyny = new SprezynyForm(this);
+            _frmDruty = new DrutyForm(this);
             _frmPomiar = new PomiarForm(this);
+            _frmListaPomiarow = new ListaPomiarowForm(this);
             _frmRaport = new RaportForm(this);
             InitTabs();
 
-            _sensor.ComPort = ConfigurationParameter.PortCOM;
-
-            //jakiś tryparse chyba trzeba 
-            _sensor.mySerialPort.BaudRate = Convert.ToInt32(ConfigurationParameter.Baudrate);
+            _sensor = new Sensor.Sensor(this);
             _sensor.Open();
-            _sensor.Form = _frmPomiar;
+            
+            int tensometerScale;
+            int.TryParse(ConfigurationParameter.SkalaTensometr, out tensometerScale);
+            int distanceScale;
+            int.TryParse(ConfigurationParameter.SkalaDroga, out distanceScale);
+            int startLevelGrams;
+            int.TryParse(ConfigurationParameter.CzuloscStart, out startLevelGrams);
+            Processor = new DataEntryProcessor(this);
+            Processor.TensometerScale = tensometerScale;
+            Processor.DistanceScale = distanceScale;
+            Processor.StartLevelGrams = startLevelGrams;
+        }
+
+        public void RefreshListKlienci()
+        {
+            Klienci = new Klienci().GetData();
+            _frmPomiar.RefreshListKlienci();
+            _frmListaPomiarow.RefreshListKlienci();
+        }
+
+        public void RefreshListProdukty()
+        {
+            Produkty = new Produkty().GetData();
+            _frmPomiar.RefreshListProdukty();
+            _frmListaPomiarow.RefreshListProdukty();
+        }
+
+        public void RefreshListSprezyny()
+        {
+            Sprezyny = new Sprezyny().GetData();
+            _frmPomiar.RefreshListSprezyny();
+            _frmListaPomiarow.RefreshListSprezyny();
+        }
+
+        public void RefreshListDruty()
+        {
+            Druty = new Druty().GetData();
+            _frmPomiar.RefreshListDruty();
+            _frmListaPomiarow.RefreshListDruty();
+        }
+
+        public void StartMeasure()
+        {
+            BeginInvoke(
+                new EventHandler(delegate
+                {
+                    _frmPomiar.StartMeasure();
+                })
+            );
+        }
+
+        public void StopMeasure()
+        {
+            BeginInvoke(
+                new EventHandler(delegate
+                {
+                    _frmPomiar.StopMeasure();
+                })
+            );
+        }
+
+        public void UpdateMeasure(SensorEntry entry)
+        {
+            BeginInvoke(
+                new EventHandler(delegate
+                {
+                    _frmPomiar.UpdateMeasure(entry);
+                })
+            );
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -87,12 +167,6 @@ namespace NestorApplication
             tabControl.TabPages[5].Controls.Add(_frmPomiar);
             tabControl.TabPages[6].Controls.Add(_frmRaport);
             tabControl.TabPages[7].Controls.Add(_frmListaPomiarow);
-        }
-
-        public void GotoReportTab()
-        {
-            _frmRaport.LoadData();
-            tabControl.SelectedTab = tpRaport;
         }
     }
 }

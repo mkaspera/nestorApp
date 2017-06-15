@@ -29,27 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnPomiar = new System.Windows.Forms.Button();
             this.cbKlient = new System.Windows.Forms.ComboBox();
             this.cbProdukt = new System.Windows.Forms.ComboBox();
             this.cbSprezyna = new System.Windows.Forms.ComboBox();
             this.cbDrut = new System.Windows.Forms.ComboBox();
             this.dgvDanePomiaru = new System.Windows.Forms.DataGridView();
-            this.próbaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.siłaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ugięcieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Procent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.danePomiaruBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRaport = new System.Windows.Forms.Button();
-            this.pomiarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.lbRostawPunktowPomiarowych = new System.Windows.Forms.Label();
-            this.lbJednostka = new System.Windows.Forms.Label();
-            this.tbRozstawPunktowPomiarowych = new System.Windows.Forms.TextBox();
-            this.tbJednostka = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbIloscPunktowPomiarowych = new System.Windows.Forms.TextBox();
             this.btnZeruj = new System.Windows.Forms.Button();
@@ -59,10 +48,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbPomiarInfo = new System.Windows.Forms.Label();
+            this.btnWydruk = new System.Windows.Forms.Button();
+            this.danePomiaruBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pomiarBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.próbaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.siłaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ugięcieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Procent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -104,16 +101,6 @@
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Drut:";
-            // 
-            // btnPomiar
-            // 
-            this.btnPomiar.Location = new System.Drawing.Point(96, 70);
-            this.btnPomiar.Name = "btnPomiar";
-            this.btnPomiar.Size = new System.Drawing.Size(75, 23);
-            this.btnPomiar.TabIndex = 7;
-            this.btnPomiar.Text = "Pomiar";
-            this.btnPomiar.UseVisualStyleBackColor = true;
-            this.btnPomiar.Click += new System.EventHandler(this.btnPomiar_Click);
             // 
             // cbKlient
             // 
@@ -171,88 +158,6 @@
             this.dgvDanePomiaru.Size = new System.Drawing.Size(448, 406);
             this.dgvDanePomiaru.TabIndex = 12;
             // 
-            // próbaDataGridViewTextBoxColumn
-            // 
-            this.próbaDataGridViewTextBoxColumn.DataPropertyName = "Próba";
-            this.próbaDataGridViewTextBoxColumn.HeaderText = "Próba";
-            this.próbaDataGridViewTextBoxColumn.Name = "próbaDataGridViewTextBoxColumn";
-            this.próbaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // siłaDataGridViewTextBoxColumn
-            // 
-            this.siłaDataGridViewTextBoxColumn.DataPropertyName = "Siła";
-            this.siłaDataGridViewTextBoxColumn.HeaderText = "Siła";
-            this.siłaDataGridViewTextBoxColumn.Name = "siłaDataGridViewTextBoxColumn";
-            this.siłaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ugięcieDataGridViewTextBoxColumn
-            // 
-            this.ugięcieDataGridViewTextBoxColumn.DataPropertyName = "Ugięcie";
-            this.ugięcieDataGridViewTextBoxColumn.HeaderText = "Ugięcie";
-            this.ugięcieDataGridViewTextBoxColumn.Name = "ugięcieDataGridViewTextBoxColumn";
-            this.ugięcieDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Procent
-            // 
-            this.Procent.DataPropertyName = "Próba";
-            this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
-            this.Procent.Name = "Procent";
-            this.Procent.ReadOnly = true;
-            // 
-            // danePomiaruBindingSource
-            // 
-            this.danePomiaruBindingSource.DataSource = typeof(NestorRepository.Entities.DanePomiaru);
-            // 
-            // btnRaport
-            // 
-            this.btnRaport.Location = new System.Drawing.Point(177, 70);
-            this.btnRaport.Name = "btnRaport";
-            this.btnRaport.Size = new System.Drawing.Size(75, 23);
-            this.btnRaport.TabIndex = 13;
-            this.btnRaport.Text = "Raport";
-            this.btnRaport.UseVisualStyleBackColor = true;
-            this.btnRaport.Click += new System.EventHandler(this.btnRaport_Click);
-            // 
-            // pomiarBindingSource
-            // 
-            this.pomiarBindingSource.DataSource = typeof(NestorRepository.Entities.Pomiar);
-            // 
-            // lbRostawPunktowPomiarowych
-            // 
-            this.lbRostawPunktowPomiarowych.AutoSize = true;
-            this.lbRostawPunktowPomiarowych.BackColor = System.Drawing.Color.White;
-            this.lbRostawPunktowPomiarowych.Location = new System.Drawing.Point(206, 44);
-            this.lbRostawPunktowPomiarowych.Name = "lbRostawPunktowPomiarowych";
-            this.lbRostawPunktowPomiarowych.Size = new System.Drawing.Size(160, 13);
-            this.lbRostawPunktowPomiarowych.TabIndex = 14;
-            this.lbRostawPunktowPomiarowych.Text = "Rozstaw punktów pomiarowych:";
-            // 
-            // lbJednostka
-            // 
-            this.lbJednostka.AutoSize = true;
-            this.lbJednostka.BackColor = System.Drawing.Color.White;
-            this.lbJednostka.Location = new System.Drawing.Point(424, 44);
-            this.lbJednostka.Name = "lbJednostka";
-            this.lbJednostka.Size = new System.Drawing.Size(59, 13);
-            this.lbJednostka.TabIndex = 15;
-            this.lbJednostka.Text = "Jednostka:";
-            // 
-            // tbRozstawPunktowPomiarowych
-            // 
-            this.tbRozstawPunktowPomiarowych.Location = new System.Drawing.Point(372, 41);
-            this.tbRozstawPunktowPomiarowych.Name = "tbRozstawPunktowPomiarowych";
-            this.tbRozstawPunktowPomiarowych.Size = new System.Drawing.Size(30, 20);
-            this.tbRozstawPunktowPomiarowych.TabIndex = 16;
-            this.tbRozstawPunktowPomiarowych.Text = "20";
-            // 
-            // tbJednostka
-            // 
-            this.tbJednostka.Location = new System.Drawing.Point(489, 41);
-            this.tbJednostka.Name = "tbJednostka";
-            this.tbJednostka.Size = new System.Drawing.Size(40, 20);
-            this.tbJednostka.TabIndex = 17;
-            this.tbJednostka.Text = "???";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -283,7 +188,7 @@
             // 
             // btnZapisz
             // 
-            this.btnZapisz.Location = new System.Drawing.Point(258, 70);
+            this.btnZapisz.Location = new System.Drawing.Point(177, 70);
             this.btnZapisz.Name = "btnZapisz";
             this.btnZapisz.Size = new System.Drawing.Size(87, 23);
             this.btnZapisz.TabIndex = 21;
@@ -324,7 +229,6 @@
             this.label7.Size = new System.Drawing.Size(67, 13);
             this.label7.TabIndex = 25;
             this.label7.Text = "Przesunięcie";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox1
             // 
@@ -338,7 +242,65 @@
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Live View";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lbPomiarInfo
+            // 
+            this.lbPomiarInfo.AutoSize = true;
+            this.lbPomiarInfo.BackColor = System.Drawing.Color.White;
+            this.lbPomiarInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lbPomiarInfo.Location = new System.Drawing.Point(12, 101);
+            this.lbPomiarInfo.Name = "lbPomiarInfo";
+            this.lbPomiarInfo.Size = new System.Drawing.Size(278, 17);
+            this.lbPomiarInfo.TabIndex = 27;
+            this.lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia.";
+            // 
+            // btnWydruk
+            // 
+            this.btnWydruk.Location = new System.Drawing.Point(96, 70);
+            this.btnWydruk.Name = "btnWydruk";
+            this.btnWydruk.Size = new System.Drawing.Size(75, 23);
+            this.btnWydruk.TabIndex = 28;
+            this.btnWydruk.Text = "Wydruk";
+            this.btnWydruk.UseVisualStyleBackColor = true;
+            this.btnWydruk.Click += new System.EventHandler(this.btnWydruk_Click);
+            // 
+            // danePomiaruBindingSource
+            // 
+            this.danePomiaruBindingSource.DataSource = typeof(NestorRepository.Entities.DanePomiaru);
+            // 
+            // pomiarBindingSource
+            // 
+            this.pomiarBindingSource.DataSource = typeof(NestorRepository.Entities.Pomiar);
+            // 
+            // próbaDataGridViewTextBoxColumn
+            // 
+            this.próbaDataGridViewTextBoxColumn.DataPropertyName = "Próba";
+            this.próbaDataGridViewTextBoxColumn.HeaderText = "Próba";
+            this.próbaDataGridViewTextBoxColumn.Name = "próbaDataGridViewTextBoxColumn";
+            this.próbaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // siłaDataGridViewTextBoxColumn
+            // 
+            this.siłaDataGridViewTextBoxColumn.DataPropertyName = "Siła";
+            this.siłaDataGridViewTextBoxColumn.HeaderText = "Siła";
+            this.siłaDataGridViewTextBoxColumn.Name = "siłaDataGridViewTextBoxColumn";
+            this.siłaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ugięcieDataGridViewTextBoxColumn
+            // 
+            this.ugięcieDataGridViewTextBoxColumn.DataPropertyName = "Ugięcie";
+            this.ugięcieDataGridViewTextBoxColumn.HeaderText = "Ugięcie";
+            this.ugięcieDataGridViewTextBoxColumn.Name = "ugięcieDataGridViewTextBoxColumn";
+            this.ugięcieDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Procent
+            // 
+            this.Procent.DataPropertyName = "Procent";
+            dataGridViewCellStyle1.Format = "N2";
+            this.Procent.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
+            this.Procent.Name = "Procent";
+            this.Procent.ReadOnly = true;
             // 
             // PomiarForm
             // 
@@ -346,22 +308,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1048, 543);
+            this.Controls.Add(this.btnWydruk);
+            this.Controls.Add(this.lbPomiarInfo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnZapisz);
             this.Controls.Add(this.btnZeruj);
             this.Controls.Add(this.tbIloscPunktowPomiarowych);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.tbJednostka);
-            this.Controls.Add(this.tbRozstawPunktowPomiarowych);
-            this.Controls.Add(this.lbJednostka);
-            this.Controls.Add(this.lbRostawPunktowPomiarowych);
-            this.Controls.Add(this.btnRaport);
             this.Controls.Add(this.dgvDanePomiaru);
             this.Controls.Add(this.cbDrut);
             this.Controls.Add(this.cbSprezyna);
             this.Controls.Add(this.cbProdukt);
             this.Controls.Add(this.cbKlient);
-            this.Controls.Add(this.btnPomiar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -369,10 +327,10 @@
             this.Name = "PomiarForm";
             this.Text = "PomiarForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,23 +341,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnPomiar;
         private System.Windows.Forms.ComboBox cbKlient;
         private System.Windows.Forms.ComboBox cbProdukt;
         private System.Windows.Forms.ComboBox cbSprezyna;
         private System.Windows.Forms.ComboBox cbDrut;
         private System.Windows.Forms.DataGridView dgvDanePomiaru;
-        private System.Windows.Forms.Button btnRaport;
         private System.Windows.Forms.BindingSource pomiarBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn próbaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn siłaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ugięcieDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Procent;
         private System.Windows.Forms.BindingSource danePomiaruBindingSource;
-        private System.Windows.Forms.Label lbRostawPunktowPomiarowych;
-        private System.Windows.Forms.Label lbJednostka;
-        private System.Windows.Forms.TextBox tbRozstawPunktowPomiarowych;
-        private System.Windows.Forms.TextBox tbJednostka;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbIloscPunktowPomiarowych;
         private System.Windows.Forms.Button btnZeruj;
@@ -409,5 +357,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lbPomiarInfo;
+        private System.Windows.Forms.Button btnWydruk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn próbaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn siłaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ugięcieDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Procent;
     }
 }

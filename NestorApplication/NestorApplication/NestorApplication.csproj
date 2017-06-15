@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DataGridViewHelper.cs" />
+    <Compile Include="Common\MeasureHelper.cs" />
     <Compile Include="Common\TabControlHelper.cs" />
     <Compile Include="Configuration\ConfigurationParameter.cs" />
     <Compile Include="MainForm.cs">
@@ -102,7 +103,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sensor.cs" />
+    <Compile Include="Sensor\DataEntryProcessor.cs" />
+    <Compile Include="Sensor\Sensor.cs" />
+    <Compile Include="Sensor\SensorEntry.cs" />
     <Compile Include="TabPages\ListaPomiarowForm.cs">
       <SubType>Form</SubType>
     </Compile>

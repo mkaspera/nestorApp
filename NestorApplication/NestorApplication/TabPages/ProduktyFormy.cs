@@ -9,11 +9,13 @@ namespace NestorApplication.TabPages
 {
     public partial class ProduktyForm : Form
     {
+        MainForm _mainForm;
         private DataTable _dataTable;
         private List<int> recordsToDeleted = new List<int>();
 
-        public ProduktyForm()
+        public ProduktyForm(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
         }
 
@@ -45,6 +47,7 @@ namespace NestorApplication.TabPages
         private void btnZapisz_Click(object sender, EventArgs e)
         {
             DataGridViewHelper.Save(dgvProdukty, "Produkty", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddProdukt, DatabaseHelper.UpdateProdukt);
+            _mainForm.RefreshListProdukty();
         }
 
         private void LoadData()

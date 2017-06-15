@@ -5,5 +5,6 @@
         public int Próba { get; set; }
         public double Siła { get; set; }
         public double Ugięcie { get; set; }
+        public double Procent { get; set; }
     }
 }

@@ -9,11 +9,13 @@ namespace NestorApplication.TabPages
 {
     public partial class DrutyForm : Form
     {
+        MainForm _mainForm;
         private DataTable _dataTable;
         private List<int> recordsToDeleted = new List<int>();
 
-        public DrutyForm()
+        public DrutyForm(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
         }
 
@@ -45,6 +47,7 @@ namespace NestorApplication.TabPages
         private void btnZapisz_Click(object sender, EventArgs e)
         {
             DataGridViewHelper.Save(dgvDruty, "Druty", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddDrut, DatabaseHelper.UpdateDrut);
+            _mainForm.RefreshListDruty();
         }
 
         private void LoadData()

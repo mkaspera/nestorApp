@@ -1,105 +1,133 @@
-﻿using NestorApplication.Common;
-using NestorRepository;
-using NestorRepository.Entities;
+﻿using NestorRepository.Entities;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows.Forms;
-
-
-
-
+using NestorApplication.Sensor;
+using NestorApplication.Common;
 
 namespace NestorApplication.TabPages
 {
     public partial class PomiarForm : Form
     {
-        MainForm _mainForm;
+        private object _synch = new object();
+        private List<DanePomiaru> _measures = new List<DanePomiaru>();
+        private MainForm _mainForm;
+        private BindingSource _bindingSource = new BindingSource();
 
-        List<Klient> _klienci = new List<Klient>();
-        List<Produkt> _produkty = new List<Produkt>();
-        List<Sprezyna> _sprezyny = new List<Sprezyna>();
-        List<Drut> _druty = new List<Drut>();
-
-        BindingSource _bindingSource = new BindingSource();
-
-        DataEntryProcessor dep;
+        // TODO - delete
+        private bool _oneLoopStart = false;
+        private bool _oneLoopStop = false;
 
         public PomiarForm(MainForm mainForm)
         {
             _mainForm = mainForm;
             InitializeComponent();
-
-            dep = new DataEntryProcessor();
-            dep.TensometerScale = Convert.ToInt32(_mainForm.ConfigurationParameter.SkalaTensometr);
-            dep.DistanceScale = Convert.ToInt32(_mainForm.ConfigurationParameter.SkalaDroga);
-            dep.StartLevelGrams = Convert.ToInt32(_mainForm.ConfigurationParameter.CzuloscStart);
-
-
             LoadData();
+        }
 
+        public void RefreshListKlienci()
+        {
+            cbKlient.DataSource = _mainForm.Klienci;
+        }
+
+        public void RefreshListProdukty()
+        {
+            cbProdukt.DataSource = _mainForm.Produkty;
+        }
+
+        public void RefreshListSprezyny()
+        {
+            cbSprezyna.DataSource = _mainForm.Sprezyny;
+        }
+
+        public void RefreshListDruty()
+        {
+            cbDrut.DataSource = _mainForm.Druty;
+        }
+
+        public void StartMeasure()
+        {
+            if (!_oneLoopStart)
+            {
+                lock (_synch)
+                {
+                    lbPomiarInfo.Text = "Trwa pomiar... Proszę czekać.";
+                    lbPomiarInfo.ForeColor = System.Drawing.Color.Red;
+                    _measures.Clear();
+                    _bindingSource.Clear();
+                    dgvDanePomiaru.Refresh();
+                    tbIloscPunktowPomiarowych.Enabled = false;
+                    btnZeruj.Enabled = false;
+                    btnWydruk.Enabled = false;
+                    btnZapisz.Enabled = false;
+                }
+            }
+            _oneLoopStart = true;
+        }
+
+        public void UpdateMeasure(SensorEntry entry)
+        {
+            if (!_oneLoopStop)
+            {
+                lock (_synch)
+                {
+                    textBoxNacisk.Text = entry.Tens.ToString();
+                    textBoxDroga.Text = entry.Offset.ToString();
+                    _measures.Add(_mainForm.Processor.ProcessDataEntry(entry));
+                }
+            }
+        }
+
+        public void StopMeasure()
+        {
+            if (_oneLoopStart && !_oneLoopStop)
+            {
+                lock (_synch)
+                {
+                    int count = 20;
+                    int.TryParse(tbIloscPunktowPomiarowych.Text, out count);
+                    List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasures(_measures, count);
+                    foreach (DanePomiaru measure in filteredMeasures)
+                    {
+                        _bindingSource.Add(measure);
+                    }
+                    dgvDanePomiaru.FirstDisplayedScrollingRowIndex = dgvDanePomiaru.RowCount - 1;
+                    dgvDanePomiaru.Refresh();
+
+                    lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia...";
+                    lbPomiarInfo.ForeColor = System.Drawing.Color.Black;
+                    tbIloscPunktowPomiarowych.Enabled = true;
+                    btnZeruj.Enabled = true;
+                    btnWydruk.Enabled = true;
+                    btnZapisz.Enabled = true;
+                    dgvDanePomiaru.Focus();
+                }
+            }
+            _oneLoopStop = true;
         }
 
         private void LoadData()
         {
-            _klienci = new Klienci().GetData();
-            _produkty = new Produkty().GetData();
-            _sprezyny = new Sprezyny().GetData();
-            _druty = new Druty().GetData();
-
-            cbKlient.DataSource = _klienci;
-            cbProdukt.DataSource = _produkty;
-            cbSprezyna.DataSource = _sprezyny;
-            cbDrut.DataSource = _druty;
+            cbKlient.DataSource = _mainForm.Klienci;
+            cbProdukt.DataSource = _mainForm.Produkty;
+            cbSprezyna.DataSource = _mainForm.Sprezyny;
+            cbDrut.DataSource = _mainForm.Druty;
 
             dgvDanePomiaru.DataSource = _bindingSource;
-
-
-            btnRaport.Enabled = true; //was false but changed for tests
-        }
-
-        private void btnPomiar_Click(object sender, EventArgs e)
-        {
-            btnPomiar.Enabled = false;
-            btnRaport.Enabled = false;
-            _bindingSource.Clear();
-            dgvDanePomiaru.Refresh();
-            ReadData();
-            btnPomiar.Enabled = true;
-            btnRaport.Enabled = true;
-        }
-
-        private void btnRaport_Click(object sender, EventArgs e)
-        {
-            SaveDataToReport();
-            _mainForm.GotoReportTab();
         }
 
         private void btnZeruj_Click(object sender, EventArgs e)
         {
-            dep.SetOffsetFlag();
-            dep.SetTaraFlag();
+            _mainForm.Processor.SetOffsetFlag();
+            _mainForm.Processor.SetTaraFlag();
+        }
+
+        private void btnWydruk_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnZapisz_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ReadData()
-        {
-            int count = 20;
-            int.TryParse(tbIloscPunktowPomiarowych.Text, out count);
-            for (int i = 0; i < count; i++)
-            {
-                DanePomiaru pomiar = new DanePomiaru { Próba = i + 1, Siła = 100 + i * 2, Ugięcie = i };
-                _bindingSource.Add(pomiar);
-                dgvDanePomiaru.Refresh();
-                Thread.Sleep(200);
-            }
-        }
-
-        private void SaveDataToReport()
         {
             _mainForm.Pomiar = new Pomiar();
             _mainForm.Pomiar.Klient = cbKlient.Text;
@@ -107,123 +135,7 @@ namespace NestorApplication.TabPages
             _mainForm.Pomiar.Sprezyna = cbSprezyna.Text;
             _mainForm.Pomiar.Drut = cbDrut.Text;
             _mainForm.Pomiar.IloscPunktowPomiarowych = int.Parse(tbIloscPunktowPomiarowych.Text);
-            _mainForm.Pomiar.RozstawPunktowPomiarowych = int.Parse(tbRozstawPunktowPomiarowych.Text);
-            _mainForm.Pomiar.Jednostka = tbJednostka.Text;
             _mainForm.Pomiar.Pomiary = (IList<DanePomiaru>)_bindingSource.List;
-        }
-
-        public void OnUpdateView(SensorEntry inData)
-        {
-            BeginInvoke(
-                new EventHandler(delegate
-                {
-                    //inData - surowe dane
-                    //DanePomiaru - TabAlignment klaska powinna mieć troche logiki - zerowanie itp
-
-                    textBoxNacisk.Text = inData.tens.ToString();
-                    textBoxDroga.Text = inData.offset.ToString();
-
-
-                    //_bindingSource.Clear();
-                    if (dep == null)
-                    {
-                        return;
-                    }
-                    var pomiar = dep.ProcessDataEntry(inData);
-                    _bindingSource.Add(pomiar);
-                    dgvDanePomiaru.FirstDisplayedScrollingRowIndex = dgvDanePomiaru.RowCount - 1;
-                    dgvDanePomiaru.Refresh();
-
-                })
-                );
-        }
-
-
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-    }
-
-
-    public class DataEntryProcessor
-    {
-        public int TensometerScale { get; set; }
-        public int DistanceScale { get; set; }
-        public int ZeroTara { get; set; }
-        public int ZeroOffset { get; set; }
-        public int StartLevelGrams { get; set; }
-
-        private bool _taraFlag;
-        private bool _measurementInProgress;
-        private DanePomiaru _previousDP;
-        private int _offsetSameSince;
-
-        public DataEntryProcessor()
-        {
-            _taraFlag = true;
-            _offesetFlag = true;
-            _previousDP = new DanePomiaru();
-        }
-
-        public void SetTaraFlag()
-        {
-            _taraFlag = true;
-        }
-
-        private bool _offesetFlag;
-        public void SetOffsetFlag()
-        {
-            _offesetFlag = true;
-        }
-
-        public DanePomiaru ProcessDataEntry(SensorEntry se)
-        {
-            if (_taraFlag)
-            {
-                _taraFlag = false;
-                ZeroTara = se.tens;
-            }
-
-            if (_offesetFlag)
-            {
-                _offesetFlag = false;
-                ZeroOffset = se.offset;
-            }
-
-            DanePomiaru dp = new DanePomiaru { Siła = (se.tens - ZeroTara) / TensometerScale, Ugięcie = (se.offset - ZeroOffset) / DistanceScale };
-
-            if (Math.Abs( dp.Siła) > StartLevelGrams && !_measurementInProgress)
-            {
-                _measurementInProgress = true;
-                _offsetSameSince = 0;
-                Console.WriteLine("POMIAR ROZPOCZĘTY");
-                
-            }
-
-            if (_previousDP.Ugięcie == dp.Ugięcie)
-            {
-                _offsetSameSince++;
-            }
-            else
-            {
-                _offsetSameSince = 0;
-            }
-
-            if (_offsetSameSince > 20 && _measurementInProgress)  //100 ostatnich pomiarów offset jest stały 
-            {
-                _measurementInProgress = false;
-                Console.WriteLine("POMIAR ZAKONCZONY");
-            }
-
-            _previousDP = dp;
-            return dp;
         }
     }
 }

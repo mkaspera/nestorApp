@@ -9,11 +9,13 @@ namespace NestorApplication.TabPages
 {
     public partial class SprezynyForm : Form
     {
+        MainForm _mainForm;
         private DataTable _dataTable;
         private List<int> recordsToDeleted = new List<int>();
 
-        public SprezynyForm()
+        public SprezynyForm(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
         }
 
@@ -45,6 +47,7 @@ namespace NestorApplication.TabPages
         private void btnZapisz_Click(object sender, EventArgs e)
         {
             DataGridViewHelper.Save(dgvSprezyny, "Sprezyny", _dataTable, recordsToDeleted, btnZapisz, DatabaseHelper.AddSprezyna, DatabaseHelper.UpdateSprezyna);
+            _mainForm.RefreshListSprezyny();
         }
 
         private void LoadData()

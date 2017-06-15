@@ -25,8 +25,6 @@ namespace NestorApplication.TabPages
             lbSprezyna.Text = _mainForm.Pomiar.Sprezyna;
             lbDrut.Text = _mainForm.Pomiar.Drut;
             lbIloscPunktowPomiarowych.Text = _mainForm.Pomiar.IloscPunktowPomiarowych.ToString();
-            lbRozstawPunktowPomiarowych.Text = _mainForm.Pomiar.RozstawPunktowPomiarowych.ToString() + " mm";
-            lbJednostka.Text = _mainForm.Pomiar.Jednostka;
 
             PrepareCharts();
         }
