@@ -39,12 +39,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnFiltruj = new System.Windows.Forms.Button();
+            this.dtpStop = new System.Windows.Forms.DateTimePicker();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnFiltruj = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.klient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.produkt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.drut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataPomiaru = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iloscPunktow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sila = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ugiecie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarNaglowki)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarSzczegoly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -59,20 +68,36 @@
             // 
             // dgvPomiarNaglowki
             // 
+            this.dgvPomiarNaglowki.AllowUserToAddRows = false;
+            this.dgvPomiarNaglowki.AllowUserToDeleteRows = false;
             this.dgvPomiarNaglowki.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPomiarNaglowki.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.klient,
+            this.produkt,
+            this.sprezyna,
+            this.drut,
+            this.dataPomiaru,
+            this.iloscPunktow});
             this.dgvPomiarNaglowki.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPomiarNaglowki.Location = new System.Drawing.Point(0, 0);
             this.dgvPomiarNaglowki.Name = "dgvPomiarNaglowki";
-            this.dgvPomiarNaglowki.Size = new System.Drawing.Size(1084, 206);
+            this.dgvPomiarNaglowki.Size = new System.Drawing.Size(1084, 205);
             this.dgvPomiarNaglowki.TabIndex = 0;
+            this.dgvPomiarNaglowki.SelectionChanged += new System.EventHandler(this.dgvPomiarNaglowki_SelectionChanged);
             // 
             // dgvPomiarSzczegoly
             // 
+            this.dgvPomiarSzczegoly.AllowUserToAddRows = false;
+            this.dgvPomiarSzczegoly.AllowUserToDeleteRows = false;
             this.dgvPomiarSzczegoly.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPomiarSzczegoly.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sila,
+            this.ugiecie});
             this.dgvPomiarSzczegoly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPomiarSzczegoly.Location = new System.Drawing.Point(0, 0);
             this.dgvPomiarSzczegoly.Name = "dgvPomiarSzczegoly";
-            this.dgvPomiarSzczegoly.Size = new System.Drawing.Size(1084, 203);
+            this.dgvPomiarSzczegoly.Size = new System.Drawing.Size(1084, 204);
             this.dgvPomiarSzczegoly.TabIndex = 1;
             // 
             // cbDrut
@@ -161,7 +186,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dateTimePicker1);
+            this.splitContainer1.Panel1.Controls.Add(this.dtpStop);
             this.splitContainer1.Panel1.Controls.Add(this.cbDrut);
             this.splitContainer1.Panel1.Controls.Add(this.dtpStart);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -182,15 +207,31 @@
             this.splitContainer1.SplitterDistance = 44;
             this.splitContainer1.TabIndex = 20;
             // 
-            // label5
+            // dtpStop
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(714, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Od";
+            this.dtpStop.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStop.Location = new System.Drawing.Point(863, 14);
+            this.dtpStop.Name = "dtpStop";
+            this.dtpStop.Size = new System.Drawing.Size(91, 20);
+            this.dtpStop.TabIndex = 25;
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStart.Location = new System.Drawing.Point(741, 14);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(91, 20);
+            this.dtpStart.TabIndex = 24;
+            // 
+            // btnFiltruj
+            // 
+            this.btnFiltruj.Location = new System.Drawing.Point(975, 13);
+            this.btnFiltruj.Name = "btnFiltruj";
+            this.btnFiltruj.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltruj.TabIndex = 23;
+            this.btnFiltruj.Text = "Filtruj";
+            this.btnFiltruj.UseVisualStyleBackColor = true;
+            this.btnFiltruj.Click += new System.EventHandler(this.btnFiltruj_Click);
             // 
             // label6
             // 
@@ -202,30 +243,15 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "do";
             // 
-            // btnFiltruj
+            // label5
             // 
-            this.btnFiltruj.Location = new System.Drawing.Point(975, 13);
-            this.btnFiltruj.Name = "btnFiltruj";
-            this.btnFiltruj.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltruj.TabIndex = 23;
-            this.btnFiltruj.Text = "Filtruj";
-            this.btnFiltruj.UseVisualStyleBackColor = true;
-            // 
-            // dtpStart
-            // 
-            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStart.Location = new System.Drawing.Point(741, 14);
-            this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(91, 20);
-            this.dtpStart.TabIndex = 24;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(863, 14);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(91, 20);
-            this.dateTimePicker1.TabIndex = 25;
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(714, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(21, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Od";
             // 
             // splitContainer2
             // 
@@ -242,8 +268,77 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dgvPomiarSzczegoly);
             this.splitContainer2.Size = new System.Drawing.Size(1084, 413);
-            this.splitContainer2.SplitterDistance = 206;
+            this.splitContainer2.SplitterDistance = 205;
             this.splitContainer2.TabIndex = 2;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // klient
+            // 
+            this.klient.DataPropertyName = "klient";
+            this.klient.HeaderText = "Klient";
+            this.klient.Name = "klient";
+            this.klient.ReadOnly = true;
+            this.klient.Width = 150;
+            // 
+            // produkt
+            // 
+            this.produkt.DataPropertyName = "produkt";
+            this.produkt.HeaderText = "Produkt";
+            this.produkt.Name = "produkt";
+            this.produkt.ReadOnly = true;
+            this.produkt.Width = 150;
+            // 
+            // sprezyna
+            // 
+            this.sprezyna.DataPropertyName = "sprezyna";
+            this.sprezyna.HeaderText = "Sprężyna";
+            this.sprezyna.Name = "sprezyna";
+            this.sprezyna.ReadOnly = true;
+            this.sprezyna.Width = 150;
+            // 
+            // drut
+            // 
+            this.drut.DataPropertyName = "drut";
+            this.drut.HeaderText = "Drut";
+            this.drut.Name = "drut";
+            this.drut.ReadOnly = true;
+            this.drut.Width = 150;
+            // 
+            // dataPomiaru
+            // 
+            this.dataPomiaru.DataPropertyName = "dataPomiaru";
+            this.dataPomiaru.HeaderText = "Data pomiaru";
+            this.dataPomiaru.Name = "dataPomiaru";
+            this.dataPomiaru.ReadOnly = true;
+            this.dataPomiaru.Width = 120;
+            // 
+            // iloscPunktow
+            // 
+            this.iloscPunktow.DataPropertyName = "iloscPunktow";
+            this.iloscPunktow.HeaderText = "Ilość punktów";
+            this.iloscPunktow.Name = "iloscPunktow";
+            this.iloscPunktow.ReadOnly = true;
+            this.iloscPunktow.Width = 75;
+            // 
+            // sila
+            // 
+            this.sila.DataPropertyName = "sila";
+            this.sila.HeaderText = "Siła";
+            this.sila.Name = "sila";
+            this.sila.ReadOnly = true;
+            // 
+            // ugiecie
+            // 
+            this.ugiecie.DataPropertyName = "ugiecie";
+            this.ugiecie.HeaderText = "Ugięcie";
+            this.ugiecie.Name = "ugiecie";
+            this.ugiecie.ReadOnly = true;
             // 
             // ListaPomiarowForm
             // 
@@ -254,6 +349,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "ListaPomiarowForm";
             this.Text = "ListaPomiarowForm";
+            this.Load += new System.EventHandler(this.ListaPomiarowForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarNaglowki)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarSzczegoly)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -285,8 +381,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnFiltruj;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpStop;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn klient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn produkt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sprezyna;
+        private System.Windows.Forms.DataGridViewTextBoxColumn drut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataPomiaru;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iloscPunktow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sila;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ugiecie;
     }
 }

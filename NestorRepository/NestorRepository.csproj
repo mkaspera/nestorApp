@@ -73,6 +73,7 @@
     <Compile Include="Entities\Klient.cs" />
     <Compile Include="Entities\Sprezyna.cs" />
     <Compile Include="Druty.cs" />
+    <Compile Include="Pomiary.cs" />
     <Compile Include="Sprezyny.cs" />
     <Compile Include="Produkty.cs" />
     <Compile Include="Klienci.cs" />

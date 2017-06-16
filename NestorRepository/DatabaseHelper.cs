@@ -131,6 +131,21 @@ namespace NestorRepository
             }
         }
 
+        public static int CountRecords(string pole, int id)
+        {
+            int count = 0;
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = string.Format("SELECT Count(id) FROM Pomiar WHERE {0} = {1}", pole, id);
+                    count = int.Parse(command.ExecuteScalar().ToString());
+                }
+            }
+            return count;
+        }
+
         public static void AddProdukt(DataRow row)
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))

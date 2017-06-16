@@ -40,7 +40,7 @@ namespace NestorApplication.Common
             btnZapisz.Enabled = true;
         }
 
-        public static void Delete(DataGridView grid, List<int> recordsToDeleted, Button btnZapisz)
+        public static void Delete(DataGridView grid, List<int> recordsToDeleted, Button btnZapisz, Func<int, bool> check)
         {
             int id = -1;
             if (grid.SelectedRows.Count > 0)
@@ -49,8 +49,16 @@ namespace NestorApplication.Common
                 if (dialogResult == DialogResult.Yes)
                 {
                     id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
-                    grid.Rows.RemoveAt(grid.SelectedRows[0].Index);
-                    grid.Refresh();
+                    if (check.Invoke(id))
+                    {
+                        grid.Rows.RemoveAt(grid.SelectedRows[0].Index);
+                        grid.Refresh();
+                        btnZapisz.Enabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie można usunąć rekordu dla którego zapisano pomiar.", "Usuwanie danych", MessageBoxButtons.OK);
+                    }
                 }
             }
            
@@ -58,8 +66,6 @@ namespace NestorApplication.Common
             {
                 recordsToDeleted.Add(id);
             }
-
-            btnZapisz.Enabled = true;
         }
 
         public static void Save(DataGridView grid, string tableName, DataTable dataTable, List<int> recordsToDeleted, Button btnZapisz, Action<DataRow> add, Action<DataRow> update)

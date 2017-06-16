@@ -41,7 +41,12 @@ namespace NestorApplication.TabPages
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.Delete(dgvDruty, recordsToDeleted, btnZapisz);
+            DataGridViewHelper.Delete(dgvDruty, recordsToDeleted, btnZapisz, CanDeleteRecord);
+        }
+
+        private bool CanDeleteRecord(int id)
+        {
+            return DatabaseHelper.CountRecords("idDrut", id) == 0;
         }
 
         private void btnZapisz_Click(object sender, EventArgs e)

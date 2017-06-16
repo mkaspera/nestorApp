@@ -118,12 +118,17 @@ namespace NestorApplication
 
         public void UpdateMeasure(SensorEntry entry)
         {
-            BeginInvoke(
-                new EventHandler(delegate
-                {
-                    _frmPomiar.UpdateMeasure(entry);
-                })
-            );
+            try
+            {
+                BeginInvoke(
+                    new EventHandler(delegate
+                    {
+                        _frmPomiar.UpdateMeasure(entry);
+                    })
+                );
+            }
+            catch (Exception)
+            { }
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
