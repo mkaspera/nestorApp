@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using NestorApplication.Sensor;
 using NestorApplication.Common;
+using LiveCharts.Wpf;
+using LiveCharts;
+using System.Linq;
 
 namespace NestorApplication.TabPages
 {
@@ -85,33 +88,12 @@ namespace NestorApplication.TabPages
                     int count = 20;
                     int.TryParse(tbIloscPunktowPomiarowych.Text, out count);
                     List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasures(_measures, count);
-                    foreach (DanePomiaru measure in filteredMeasures)
-                    {
-                        _bindingSource.Add(measure);
-                    }
-                    dgvDanePomiaru.FirstDisplayedScrollingRowIndex = dgvDanePomiaru.RowCount - 1;
-                    dgvDanePomiaru.Refresh();
-
-                    lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia...";
-                    lbPomiarInfo.ForeColor = System.Drawing.Color.Black;
-                    tbIloscPunktowPomiarowych.Enabled = true;
-                    btnZeruj.Enabled = true;
-                    btnWydruk.Enabled = true;
-                    btnZapisz.Enabled = true;
-                    dgvDanePomiaru.Focus();
+                    UpdateChart(filteredMeasures, count);
+                    UpdateGrid(filteredMeasures);
+                    UpdateViewStop();
                 }
             }
             _oneLoopStop = true;
-        }
-
-        private void LoadData()
-        {
-            cbKlient.DataSource = _mainForm.Klienci;
-            cbProdukt.DataSource = _mainForm.Produkty;
-            cbSprezyna.DataSource = _mainForm.Sprezyny;
-            cbDrut.DataSource = _mainForm.Druty;
-
-            dgvDanePomiaru.DataSource = _bindingSource;
         }
 
         private void btnZeruj_Click(object sender, EventArgs e)
@@ -158,11 +140,96 @@ namespace NestorApplication.TabPages
             }
         }
 
+        private void LoadData()
+        {
+            cbKlient.DataSource = _mainForm.Klienci;
+            cbProdukt.DataSource = _mainForm.Produkty;
+            cbSprezyna.DataSource = _mainForm.Sprezyny;
+            cbDrut.DataSource = _mainForm.Druty;
+
+            dgvDanePomiaru.DataSource = _bindingSource;
+        }
+
         private void CleanGrid()
         {
             _measures.Clear();
             _bindingSource.Clear();
             dgvDanePomiaru.Refresh();
+        }
+
+        private void UpdateChart(List<DanePomiaru> filteredMeasures, int count)
+        {
+            LineSeries seriaSiła = new LineSeries();
+            seriaSiła.Title = "Siła";
+            seriaSiła.Values = new ChartValues<double>();
+
+            LineSeries seriaUgięcie = new LineSeries();
+            seriaUgięcie.Title = "Ugięcie";
+            seriaUgięcie.Values = new ChartValues<double>();
+
+            double minSiła = filteredMeasures.Min(x => Math.Abs(x.Siła));
+            double maxSiła = filteredMeasures.Max(x => Math.Abs(x.Siła));
+            double minUgięcie = filteredMeasures.Min(x => Math.Abs(x.Ugięcie));
+            double maxUgięcie = filteredMeasures.Max(x => Math.Abs(x.Ugięcie));
+
+            Axis axUgiecie = new Axis();
+            axUgiecie.Title = "Ugięcie";
+            axUgiecie.Separator = new Separator
+            {
+                Step = (maxUgięcie - minUgięcie) / count,
+                IsEnabled = false
+            };
+            axUgiecie.Labels = new List<string>();
+            axUgiecie.MinValue = minUgięcie;
+            axUgiecie.MaxValue = maxUgięcie;
+
+            Axis axSila = new Axis();
+            axSila.Title = "Siła";
+            axSila.Separator = new Separator
+            {
+                Step = (maxSiła - minSiła) / count,
+                IsEnabled = false
+            };
+            axSila.Labels = new List<string>();
+            axSila.MinValue = minSiła;
+            axSila.MaxValue = maxSiła;
+
+            foreach (DanePomiaru pomiar in filteredMeasures)
+            {
+                seriaSiła.Values.Add(Math.Abs(pomiar.Siła));
+                seriaUgięcie.Values.Add(Math.Abs(pomiar.Ugięcie));
+                axSila.Labels.Add(Math.Abs(pomiar.Siła).ToString());
+                axUgiecie.Labels.Add(Math.Abs(pomiar.Ugięcie).ToString());
+            }
+
+            chartSilaDoUgiecia.Series.Add(seriaSiła);
+            chartSilaDoUgiecia.AxisX.Add(axUgiecie);
+            chartSilaDoUgiecia.LegendLocation = LegendLocation.Right;
+
+            chartUgiecieDoSily.Series.Add(seriaUgięcie);
+            chartUgiecieDoSily.AxisX.Add(axSila);
+            chartUgiecieDoSily.LegendLocation = LegendLocation.Right;
+        }
+
+        private void UpdateGrid(List<DanePomiaru> filteredMeasures)
+        {
+            foreach (DanePomiaru measure in filteredMeasures)
+            {
+                _bindingSource.Add(measure);
+            }
+            dgvDanePomiaru.FirstDisplayedScrollingRowIndex = dgvDanePomiaru.RowCount - 1;
+            dgvDanePomiaru.Refresh();
+        }
+
+        private void UpdateViewStop()
+        {
+            lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia...";
+            lbPomiarInfo.ForeColor = System.Drawing.Color.Black;
+            tbIloscPunktowPomiarowych.Enabled = true;
+            btnZeruj.Enabled = true;
+            btnWydruk.Enabled = true;
+            btnZapisz.Enabled = true;
+            dgvDanePomiaru.Focus();
         }
     }
 }

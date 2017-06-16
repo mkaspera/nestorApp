@@ -13,7 +13,7 @@ namespace NestorRepository
             query += "LEFT JOIN Produkty produkt ON pomiar.idProdukt = produkt.id ";
             query += "LEFT JOIN Sprezyny sprezyna ON pomiar.idSprezyna = sprezyna.id ";
             query += "LEFT JOIN Druty drut ON pomiar.idDrut = drut.id ";
-            query += "WHERE data >= '" + start.ToShortDateString() + "' AND data <= '" + stop.ToShortDateString() + "'";
+            query += "WHERE data >= '" + start.ToShortDateString() + " 00:00:00' AND data <= '" + stop.ToShortDateString() + " 23:59:59'";
             if (klient.Id > 0)
             {
                 query += " AND pomiar.idKlient = " + klient.Id;
@@ -36,7 +36,7 @@ namespace NestorRepository
 
         public static string GetQueryDetails(object idPomiar)
         {
-            return "SELECT sila, ugiecie FROM DanePomiaru WHERE idPomiar = " + idPomiar;
+            return "SELECT proba, sila, ugiecie FROM DanePomiaru WHERE idPomiar = " + idPomiar;
         }
     }
 }

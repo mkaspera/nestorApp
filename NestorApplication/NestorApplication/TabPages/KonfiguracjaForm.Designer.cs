@@ -43,12 +43,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tbCzuloscStart = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbDrogaStop = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbTimeoutStop = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbKonfiguracja
@@ -178,68 +172,12 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "(start po zdetektowaniu siły)";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(79, 188);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Droga:";
-            // 
-            // tbDrogaStop
-            // 
-            this.tbDrogaStop.Location = new System.Drawing.Point(124, 185);
-            this.tbDrogaStop.Name = "tbDrogaStop";
-            this.tbDrogaStop.Size = new System.Drawing.Size(64, 20);
-            this.tbDrogaStop.TabIndex = 18;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(194, 188);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(238, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "(stop po zdetektowaniu, że droga się nie zmienia)";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(70, 218);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(48, 13);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Timeout:";
-            // 
-            // tbTimeoutStop
-            // 
-            this.tbTimeoutStop.Location = new System.Drawing.Point(124, 215);
-            this.tbTimeoutStop.Name = "tbTimeoutStop";
-            this.tbTimeoutStop.Size = new System.Drawing.Size(64, 20);
-            this.tbTimeoutStop.TabIndex = 21;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(194, 218);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(238, 13);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "(stop po zdetektowaniu, że droga się nie zmienia)";
-            // 
             // KonfiguracjaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(477, 488);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.tbTimeoutStop);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.tbDrogaStop);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbCzuloscStart);
             this.Controls.Add(this.label7);
@@ -279,11 +217,5 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbCzuloscStart;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tbDrogaStop;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tbTimeoutStop;
-        private System.Windows.Forms.Label label12;
     }
 }

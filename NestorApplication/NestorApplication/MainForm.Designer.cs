@@ -35,7 +35,6 @@
             this.tpParametrySprezyn = new System.Windows.Forms.TabPage();
             this.tpParametryDrutu = new System.Windows.Forms.TabPage();
             this.tpPomiar = new System.Windows.Forms.TabPage();
-            this.tpRaport = new System.Windows.Forms.TabPage();
             this.tpListaPomiarow = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +47,6 @@
             this.tabControl.Controls.Add(this.tpParametrySprezyn);
             this.tabControl.Controls.Add(this.tpParametryDrutu);
             this.tabControl.Controls.Add(this.tpPomiar);
-            this.tabControl.Controls.Add(this.tpRaport);
             this.tabControl.Controls.Add(this.tpListaPomiarow);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -112,15 +110,6 @@
             this.tpPomiar.Text = "Pomiar";
             this.tpPomiar.UseVisualStyleBackColor = true;
             // 
-            // tpRaport
-            // 
-            this.tpRaport.Location = new System.Drawing.Point(4, 22);
-            this.tpRaport.Name = "tpRaport";
-            this.tpRaport.Size = new System.Drawing.Size(1076, 635);
-            this.tpRaport.TabIndex = 6;
-            this.tpRaport.Text = "Raport";
-            this.tpRaport.UseVisualStyleBackColor = true;
-            // 
             // tpListaPomiarow
             // 
             this.tpListaPomiarow.Location = new System.Drawing.Point(4, 22);
@@ -154,7 +143,6 @@
         private System.Windows.Forms.TabPage tpParametrySprezyn;
         private System.Windows.Forms.TabPage tpParametryDrutu;
         private System.Windows.Forms.TabPage tpPomiar;
-        private System.Windows.Forms.TabPage tpRaport;
         private System.Windows.Forms.TabPage tpListaPomiarow;
     }
 }

@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvPomiarNaglowki = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.klient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.produkt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.drut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataPomiaru = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iloscPunktow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPomiarSzczegoly = new System.Windows.Forms.DataGridView();
             this.cbDrut = new System.Windows.Forms.ComboBox();
             this.cbSprezyna = new System.Windows.Forms.ComboBox();
@@ -45,13 +52,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.klient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.produkt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.drut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataPomiaru = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iloscPunktow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proba = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sila = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ugiecie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarNaglowki)).BeginInit();
@@ -86,12 +87,68 @@
             this.dgvPomiarNaglowki.TabIndex = 0;
             this.dgvPomiarNaglowki.SelectionChanged += new System.EventHandler(this.dgvPomiarNaglowki_SelectionChanged);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // klient
+            // 
+            this.klient.DataPropertyName = "klient";
+            this.klient.HeaderText = "Klient";
+            this.klient.Name = "klient";
+            this.klient.ReadOnly = true;
+            this.klient.Width = 150;
+            // 
+            // produkt
+            // 
+            this.produkt.DataPropertyName = "produkt";
+            this.produkt.HeaderText = "Produkt";
+            this.produkt.Name = "produkt";
+            this.produkt.ReadOnly = true;
+            this.produkt.Width = 150;
+            // 
+            // sprezyna
+            // 
+            this.sprezyna.DataPropertyName = "sprezyna";
+            this.sprezyna.HeaderText = "Sprężyna";
+            this.sprezyna.Name = "sprezyna";
+            this.sprezyna.ReadOnly = true;
+            this.sprezyna.Width = 150;
+            // 
+            // drut
+            // 
+            this.drut.DataPropertyName = "drut";
+            this.drut.HeaderText = "Drut";
+            this.drut.Name = "drut";
+            this.drut.ReadOnly = true;
+            this.drut.Width = 150;
+            // 
+            // dataPomiaru
+            // 
+            this.dataPomiaru.DataPropertyName = "dataPomiaru";
+            this.dataPomiaru.HeaderText = "Data pomiaru";
+            this.dataPomiaru.Name = "dataPomiaru";
+            this.dataPomiaru.ReadOnly = true;
+            this.dataPomiaru.Width = 120;
+            // 
+            // iloscPunktow
+            // 
+            this.iloscPunktow.DataPropertyName = "iloscPunktow";
+            this.iloscPunktow.HeaderText = "Ilość punktów";
+            this.iloscPunktow.Name = "iloscPunktow";
+            this.iloscPunktow.ReadOnly = true;
+            this.iloscPunktow.Width = 75;
+            // 
             // dgvPomiarSzczegoly
             // 
             this.dgvPomiarSzczegoly.AllowUserToAddRows = false;
             this.dgvPomiarSzczegoly.AllowUserToDeleteRows = false;
             this.dgvPomiarSzczegoly.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPomiarSzczegoly.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.proba,
             this.sila,
             this.ugiecie});
             this.dgvPomiarSzczegoly.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -271,60 +328,13 @@
             this.splitContainer2.SplitterDistance = 205;
             this.splitContainer2.TabIndex = 2;
             // 
-            // id
+            // proba
             // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            // 
-            // klient
-            // 
-            this.klient.DataPropertyName = "klient";
-            this.klient.HeaderText = "Klient";
-            this.klient.Name = "klient";
-            this.klient.ReadOnly = true;
-            this.klient.Width = 150;
-            // 
-            // produkt
-            // 
-            this.produkt.DataPropertyName = "produkt";
-            this.produkt.HeaderText = "Produkt";
-            this.produkt.Name = "produkt";
-            this.produkt.ReadOnly = true;
-            this.produkt.Width = 150;
-            // 
-            // sprezyna
-            // 
-            this.sprezyna.DataPropertyName = "sprezyna";
-            this.sprezyna.HeaderText = "Sprężyna";
-            this.sprezyna.Name = "sprezyna";
-            this.sprezyna.ReadOnly = true;
-            this.sprezyna.Width = 150;
-            // 
-            // drut
-            // 
-            this.drut.DataPropertyName = "drut";
-            this.drut.HeaderText = "Drut";
-            this.drut.Name = "drut";
-            this.drut.ReadOnly = true;
-            this.drut.Width = 150;
-            // 
-            // dataPomiaru
-            // 
-            this.dataPomiaru.DataPropertyName = "dataPomiaru";
-            this.dataPomiaru.HeaderText = "Data pomiaru";
-            this.dataPomiaru.Name = "dataPomiaru";
-            this.dataPomiaru.ReadOnly = true;
-            this.dataPomiaru.Width = 120;
-            // 
-            // iloscPunktow
-            // 
-            this.iloscPunktow.DataPropertyName = "iloscPunktow";
-            this.iloscPunktow.HeaderText = "Ilość punktów";
-            this.iloscPunktow.Name = "iloscPunktow";
-            this.iloscPunktow.ReadOnly = true;
-            this.iloscPunktow.Width = 75;
+            this.proba.DataPropertyName = "proba";
+            this.proba.HeaderText = "Próba";
+            this.proba.Name = "proba";
+            this.proba.ReadOnly = true;
+            this.proba.Width = 50;
             // 
             // sila
             // 
@@ -391,6 +401,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn drut;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataPomiaru;
         private System.Windows.Forms.DataGridViewTextBoxColumn iloscPunktow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proba;
         private System.Windows.Forms.DataGridViewTextBoxColumn sila;
         private System.Windows.Forms.DataGridViewTextBoxColumn ugiecie;
     }

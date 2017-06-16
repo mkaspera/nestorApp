@@ -130,12 +130,6 @@
     <Compile Include="TabPages\PomiarForm.Designer.cs">
       <DependentUpon>PomiarForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\RaportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TabPages\RaportForm.Designer.cs">
-      <DependentUpon>RaportForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="TabPages\SprezynyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,9 +171,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PomiarForm.resx">
       <DependentUpon>PomiarForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\RaportForm.resx">
-      <DependentUpon>RaportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\SprezynyForm.resx">
       <DependentUpon>SprezynyForm.cs</DependentUpon>

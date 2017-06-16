@@ -285,7 +285,7 @@ namespace NestorRepository
 
                         foreach (DanePomiaru pomiar in pomiary)
                         {
-                            command.CommandText = string.Format("INSERT INTO DanePomiaru (idPomiar, sila, ugiecie) VALUES({0},{1},{2})", idPomiar, pomiar.Siła, pomiar.Ugięcie);
+                            command.CommandText = string.Format("INSERT INTO DanePomiaru (idPomiar, proba, sila, ugiecie) VALUES({0},{1},{2},{3})", idPomiar, pomiar.Próba, pomiar.Siła, pomiar.Ugięcie);
                             command.ExecuteNonQuery();
                         }
                         transaction.Commit();

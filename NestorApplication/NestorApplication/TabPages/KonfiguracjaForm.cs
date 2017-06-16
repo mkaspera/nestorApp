@@ -27,13 +27,11 @@ namespace NestorApplication.TabPages
             tbSkalaTensometr.Text = _mainForm.ConfigurationParameter.SkalaTensometr;
             tbSkalaDroga.Text = _mainForm.ConfigurationParameter.SkalaDroga;
             tbCzuloscStart.Text = _mainForm.ConfigurationParameter.CzuloscStart;
-            tbDrogaStop.Text = _mainForm.ConfigurationParameter.DrogaStop;
-            tbTimeoutStop.Text = _mainForm.ConfigurationParameter.TimeoutStop;
         }
 
         private void btnZapisz_Click(object sender, EventArgs e)
         {
-            _mainForm.ConfigurationParameter.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text, tbDrogaStop.Text, tbTimeoutStop.Text);
+            _mainForm.ConfigurationParameter.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text);
             MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
         }
     }

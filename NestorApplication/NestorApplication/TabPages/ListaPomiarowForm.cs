@@ -19,7 +19,7 @@ namespace NestorApplication.TabPages
             InitializeComponent();
         }
 
-        private void ListaPomiarowForm_Load(object sender, System.EventArgs e)
+        private void ListaPomiarowForm_Load(object sender, EventArgs e)
         {
             LoadData();
         }

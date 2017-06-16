@@ -28,7 +28,6 @@ namespace NestorApplication
         private DrutyForm _frmDruty;
         private PomiarForm _frmPomiar;
         private ListaPomiarowForm _frmListaPomiarow;
-        private RaportForm _frmRaport;
 
         private Sensor.Sensor _sensor;
 
@@ -50,7 +49,6 @@ namespace NestorApplication
             _frmDruty = new DrutyForm(this);
             _frmPomiar = new PomiarForm(this);
             _frmListaPomiarow = new ListaPomiarowForm(this);
-            _frmRaport = new RaportForm(this);
             InitTabs();
 
             _sensor = new Sensor.Sensor(this);
@@ -163,15 +161,14 @@ namespace NestorApplication
 
         private void InitTabs()
         {
-            TabControlHelper.SetTabProperties(_frmKonfiguracja, _frmKlienci, _frmProdukty, _frmSprezyny, _frmDruty, _frmPomiar, _frmRaport, _frmListaPomiarow);
+            TabControlHelper.SetTabProperties(_frmKonfiguracja, _frmKlienci, _frmProdukty, _frmSprezyny, _frmDruty, _frmPomiar, _frmListaPomiarow);
             tabControl.TabPages[0].Controls.Add(_frmKonfiguracja);
             tabControl.TabPages[1].Controls.Add(_frmKlienci);
             tabControl.TabPages[2].Controls.Add(_frmProdukty);
             tabControl.TabPages[3].Controls.Add(_frmSprezyny);
             tabControl.TabPages[4].Controls.Add(_frmDruty);
             tabControl.TabPages[5].Controls.Add(_frmPomiar);
-            tabControl.TabPages[6].Controls.Add(_frmRaport);
-            tabControl.TabPages[7].Controls.Add(_frmListaPomiarow);
+            tabControl.TabPages[6].Controls.Add(_frmListaPomiarow);
         }
     }
 }
