@@ -20,10 +20,10 @@ namespace NestorApplication.TabPages
 
         public void LoadData()
         {
-            lbKlient.Text = _mainForm.Pomiar.Klient;
-            lbProdukt.Text = _mainForm.Pomiar.Produkt;
-            lbSprezyna.Text = _mainForm.Pomiar.Sprezyna;
-            lbDrut.Text = _mainForm.Pomiar.Drut;
+            lbKlient.Text = _mainForm.Pomiar.Klient.Nazwa;
+            lbProdukt.Text = _mainForm.Pomiar.Produkt.Nazwa;
+            lbSprezyna.Text = _mainForm.Pomiar.Sprezyna.Nazwa;
+            lbDrut.Text = _mainForm.Pomiar.Drut.Nazwa;
             lbIloscPunktowPomiarowych.Text = _mainForm.Pomiar.IloscPunktowPomiarowych.ToString();
 
             PrepareCharts();

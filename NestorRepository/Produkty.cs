@@ -11,6 +11,7 @@ namespace NestorRepository
         public List<Produkt> GetData()
         {
             List<Produkt> produkty = new List<Produkt>();
+            produkty.Add(new Produkt { Id = -1, Nazwa = "== Wybierz ==", Długość = 0, Szerokość = 0, Wysokość = 0, Typ = string.Empty });
 
             DataTable dataTable = DatabaseHelper.ReadDataTable(SelectQuery);
             foreach (DataRow row in dataTable.Rows)

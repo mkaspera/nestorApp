@@ -53,9 +53,7 @@ namespace NestorApplication.TabPages
                 {
                     lbPomiarInfo.Text = "Trwa pomiar... Proszę czekać.";
                     lbPomiarInfo.ForeColor = System.Drawing.Color.Red;
-                    _measures.Clear();
-                    _bindingSource.Clear();
-                    dgvDanePomiaru.Refresh();
+                    CleanGrid();
                     tbIloscPunktowPomiarowych.Enabled = false;
                     btnZeruj.Enabled = false;
                     btnWydruk.Enabled = false;
@@ -129,13 +127,42 @@ namespace NestorApplication.TabPages
 
         private void btnZapisz_Click(object sender, EventArgs e)
         {
+            int iloscPunktowPomiarowych;
+            bool resultPunktyPomiarowe = int.TryParse(tbIloscPunktowPomiarowych.Text, out iloscPunktowPomiarowych);
+
+            Klient klient = (Klient)cbKlient.SelectedValue;
+            Produkt produkt = (Produkt)cbProdukt.SelectedValue;
+            Sprezyna sprezyna = (Sprezyna)cbSprezyna.SelectedValue;
+            Drut drut = (Drut)cbDrut.SelectedValue;
+            IList<DanePomiaru> pomiary = (IList<DanePomiaru>)_bindingSource.List;
+
+            string message = string.Empty;
+            bool valid = MeasureHelper.Validate(resultPunktyPomiarowe, klient, produkt, sprezyna, drut, pomiary, out message);
+            if (!valid)
+            {
+                MessageBox.Show(message, "Poprawność danych");
+                return;
+            }
+
             _mainForm.Pomiar = new Pomiar();
-            _mainForm.Pomiar.Klient = cbKlient.Text;
-            _mainForm.Pomiar.Produkt = cbProdukt.Text;
-            _mainForm.Pomiar.Sprezyna = cbSprezyna.Text;
-            _mainForm.Pomiar.Drut = cbDrut.Text;
-            _mainForm.Pomiar.IloscPunktowPomiarowych = int.Parse(tbIloscPunktowPomiarowych.Text);
-            _mainForm.Pomiar.Pomiary = (IList<DanePomiaru>)_bindingSource.List;
+            _mainForm.Pomiar.Klient = klient;
+            _mainForm.Pomiar.Produkt = produkt;
+            _mainForm.Pomiar.Sprezyna = sprezyna;
+            _mainForm.Pomiar.Drut = drut;
+            _mainForm.Pomiar.IloscPunktowPomiarowych = iloscPunktowPomiarowych;
+            _mainForm.Pomiar.Pomiary = pomiary;
+
+            if (MeasureHelper.Save(_mainForm.Pomiar))
+            {
+                CleanGrid();
+            }
+        }
+
+        private void CleanGrid()
+        {
+            _measures.Clear();
+            _bindingSource.Clear();
+            dgvDanePomiaru.Refresh();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace NestorRepository
         public List<Sprezyna> GetData()
         {
             List<Sprezyna> sprezyny = new List<Sprezyna>();
+            sprezyny.Add(new Sprezyna { Id = -1, Nazwa = "== Wybierz ==", LiczbaZwoi = 0, WysokośćPoczątkowa = 0, Średnica = 0 });
 
             DataTable dataTable = DatabaseHelper.ReadDataTable(SelectQuery);
             foreach (DataRow row in dataTable.Rows)

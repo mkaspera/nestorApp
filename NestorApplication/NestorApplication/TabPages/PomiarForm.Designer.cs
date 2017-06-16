@@ -39,6 +39,11 @@
             this.cbSprezyna = new System.Windows.Forms.ComboBox();
             this.cbDrut = new System.Windows.Forms.ComboBox();
             this.dgvDanePomiaru = new System.Windows.Forms.DataGridView();
+            this.próbaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.siłaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ugięcieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Procent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.danePomiaruBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.tbIloscPunktowPomiarowych = new System.Windows.Forms.TextBox();
             this.btnZeruj = new System.Windows.Forms.Button();
@@ -50,15 +55,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPomiarInfo = new System.Windows.Forms.Label();
             this.btnWydruk = new System.Windows.Forms.Button();
-            this.danePomiaruBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pomiarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.próbaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.siłaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ugięcieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Procent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,6 +158,40 @@
             this.dgvDanePomiaru.Size = new System.Drawing.Size(448, 406);
             this.dgvDanePomiaru.TabIndex = 12;
             // 
+            // próbaDataGridViewTextBoxColumn
+            // 
+            this.próbaDataGridViewTextBoxColumn.DataPropertyName = "Próba";
+            this.próbaDataGridViewTextBoxColumn.HeaderText = "Próba";
+            this.próbaDataGridViewTextBoxColumn.Name = "próbaDataGridViewTextBoxColumn";
+            this.próbaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // siłaDataGridViewTextBoxColumn
+            // 
+            this.siłaDataGridViewTextBoxColumn.DataPropertyName = "Siła";
+            this.siłaDataGridViewTextBoxColumn.HeaderText = "Siła";
+            this.siłaDataGridViewTextBoxColumn.Name = "siłaDataGridViewTextBoxColumn";
+            this.siłaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ugięcieDataGridViewTextBoxColumn
+            // 
+            this.ugięcieDataGridViewTextBoxColumn.DataPropertyName = "Ugięcie";
+            this.ugięcieDataGridViewTextBoxColumn.HeaderText = "Ugięcie";
+            this.ugięcieDataGridViewTextBoxColumn.Name = "ugięcieDataGridViewTextBoxColumn";
+            this.ugięcieDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Procent
+            // 
+            this.Procent.DataPropertyName = "Procent";
+            dataGridViewCellStyle1.Format = "N2";
+            this.Procent.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
+            this.Procent.Name = "Procent";
+            this.Procent.ReadOnly = true;
+            // 
+            // danePomiaruBindingSource
+            // 
+            this.danePomiaruBindingSource.DataSource = typeof(NestorRepository.Entities.DanePomiaru);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -241,7 +275,7 @@
             this.groupBox1.Size = new System.Drawing.Size(230, 106);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Live View";
+            this.groupBox1.Text = "Podgląd na żywo";
             // 
             // lbPomiarInfo
             // 
@@ -264,43 +298,9 @@
             this.btnWydruk.UseVisualStyleBackColor = true;
             this.btnWydruk.Click += new System.EventHandler(this.btnWydruk_Click);
             // 
-            // danePomiaruBindingSource
-            // 
-            this.danePomiaruBindingSource.DataSource = typeof(NestorRepository.Entities.DanePomiaru);
-            // 
             // pomiarBindingSource
             // 
             this.pomiarBindingSource.DataSource = typeof(NestorRepository.Entities.Pomiar);
-            // 
-            // próbaDataGridViewTextBoxColumn
-            // 
-            this.próbaDataGridViewTextBoxColumn.DataPropertyName = "Próba";
-            this.próbaDataGridViewTextBoxColumn.HeaderText = "Próba";
-            this.próbaDataGridViewTextBoxColumn.Name = "próbaDataGridViewTextBoxColumn";
-            this.próbaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // siłaDataGridViewTextBoxColumn
-            // 
-            this.siłaDataGridViewTextBoxColumn.DataPropertyName = "Siła";
-            this.siłaDataGridViewTextBoxColumn.HeaderText = "Siła";
-            this.siłaDataGridViewTextBoxColumn.Name = "siłaDataGridViewTextBoxColumn";
-            this.siłaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ugięcieDataGridViewTextBoxColumn
-            // 
-            this.ugięcieDataGridViewTextBoxColumn.DataPropertyName = "Ugięcie";
-            this.ugięcieDataGridViewTextBoxColumn.HeaderText = "Ugięcie";
-            this.ugięcieDataGridViewTextBoxColumn.Name = "ugięcieDataGridViewTextBoxColumn";
-            this.ugięcieDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Procent
-            // 
-            this.Procent.DataPropertyName = "Procent";
-            dataGridViewCellStyle1.Format = "N2";
-            this.Procent.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
-            this.Procent.Name = "Procent";
-            this.Procent.ReadOnly = true;
             // 
             // PomiarForm
             // 
@@ -327,9 +327,9 @@
             this.Name = "PomiarForm";
             this.Text = "PomiarForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pomiarBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

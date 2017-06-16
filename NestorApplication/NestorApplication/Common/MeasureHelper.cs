@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NestorRepository.Entities;
+using NestorRepository;
+using System.Windows;
+using System.Linq;
 
 namespace NestorApplication.Common
 {
@@ -20,11 +24,92 @@ namespace NestorApplication.Common
 
                 DanePomiaru measure = measures[i * offset];
                 measure.Próba = i + 1;
-                measure.Procent = measure.Ugięcie != 0 ? measure.Siła / measure.Ugięcie * 100: 0;
+                measure.Procent = measure.Ugięcie != 0 ? measure.Siła / measure.Ugięcie * 100 : 0;
                 filteredMeasures.Add(measure);
             }
 
             return filteredMeasures;
+        }
+
+        // TODO - decide which version
+        private static int GetClosestIndex(List<DanePomiaru> list, DanePomiaru targetvalue)
+        {
+            return list.IndexOf(list.OrderBy(d => Math.Abs(d.Ugięcie - targetvalue.Ugięcie)).ElementAt(0));
+        }
+        
+        // TODO - decide which version
+        public static List<DanePomiaru> PrepareMeasuresBySzymon(List<DanePomiaru> measurementList, int datapoints)
+        {
+            if (measurementList.Count == 0)
+            {
+                return null;
+            }
+
+            int min = int.MaxValue, max = int.MinValue;
+            foreach (DanePomiaru data in measurementList)
+            {
+                int offset = (int)data.Ugięcie;
+                if (min > offset) min = offset;
+                if (max < offset) max = offset;
+            }
+
+            int range = max - min;
+            int distBetweenPoint = range / datapoints;
+
+            List<DanePomiaru> normalizedList = new List<DanePomiaru>();
+
+            int presentPoint = min;
+            for (int i = 0; i < datapoints; i++)
+            {
+                int idx = GetClosestIndex(measurementList, new DanePomiaru { Ugięcie = presentPoint });
+                normalizedList.Add(measurementList[idx]);
+                presentPoint += distBetweenPoint;
+            }
+
+            return normalizedList;
+        }
+
+        public static bool Validate(bool resultPunktyPomiarowe, Klient klient, Produkt produkt, Sprezyna sprezyna, Drut drut, IList<DanePomiaru> pomiary, out string message)
+        {
+            message = string.Empty;
+            if (!resultPunktyPomiarowe)
+            {
+                message = "Niepoprawna wartość ilości punktów pomiarowych.";
+                return false;
+            }
+            if (klient.Id < 0)
+            {
+                message = "Wybierz klienta.";
+                return false;
+            }
+            if (produkt.Id < 0)
+            {
+                message = "Wybierz produkt.";
+                return false;
+            }
+            if (sprezyna.Id < 0)
+            {
+                message = "Wybierz sprężynę.";
+                return false;
+            }
+            if (drut.Id < 0)
+            {
+                message = "Wybierz drut.";
+                return false;
+            }
+            if (pomiary.Count == 0)
+            {
+                message = "Brak pomiarów.";
+                return false;
+            }
+            return true;
+        }
+
+        public static bool Save(Pomiar pomiar)
+        {
+            bool result = DatabaseHelper.AddPomiar(pomiar.Klient, pomiar.Produkt, pomiar.Sprezyna, pomiar.Drut, DateTime.Now, pomiar.IloscPunktowPomiarowych, pomiar.Pomiary);
+            MessageBox.Show(result ? "Pomyślnie zapisano zmiany." : "Nie udało się zapisać danych. Spróbuj ponownie.", "Zapis danych");
+            return result;
         }
     }
 }

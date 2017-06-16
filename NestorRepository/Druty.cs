@@ -11,6 +11,7 @@ namespace NestorRepository
         public List<Drut> GetData()
         {
             List<Drut> druty = new List<Drut>();
+            druty.Add(new Drut { Id = -1, Nazwa = "== Wybierz ==", Dostawca = string.Empty, Średnica = 0 });
 
             DataTable dataTable = DatabaseHelper.ReadDataTable(SelectQuery);
             foreach (DataRow row in dataTable.Rows)

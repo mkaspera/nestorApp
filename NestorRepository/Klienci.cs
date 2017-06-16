@@ -11,6 +11,7 @@ namespace NestorRepository
         public List<Klient> GetData()
         {
             List<Klient> klienci = new List<Klient>();
+            klienci.Add(new Klient { Id = -1, Nazwa = "== Wybierz ==", Logo = string.Empty });
 
             DataTable dataTable = DatabaseHelper.ReadDataTable(SelectQuery);
             foreach (DataRow row in dataTable.Rows)

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SQLite;
 using System.IO;
 using System.Data;
+using System;
 
 namespace NestorRepository
 {
@@ -245,6 +246,40 @@ namespace NestorRepository
                     string dostawca = row.ItemArray[3].ToString();
                     command.CommandText = string.Format("UPDATE Druty SET nazwa = '{0}', srednica = {1}, dostawca = '{2}' WHERE id = {3}", nazwa, srednica, dostawca, id);
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static bool AddPomiar(Klient klient, Produkt produkt, Sprezyna sprezyna, Drut drut, DateTime date, int iloscPunktowPomiarowych, IList<DanePomiaru> pomiary)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    SQLiteTransaction transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+
+                    try
+                    {
+                        command.CommandText = string.Format("INSERT INTO Pomiar (idKlient, idProdukt, idSprezyna, idDrut, data, iloscPunktowPomiarowych) VALUES({0},{1},{2},{3},'{4}',{5})", klient.Id, produkt.Id, sprezyna.Id, drut.Id, date, iloscPunktowPomiarowych);
+                        command.ExecuteNonQuery();
+
+                        command.CommandText = "SELECT last_insert_rowid()";
+                        object idPomiar = command.ExecuteScalar();
+
+                        foreach (DanePomiaru pomiar in pomiary)
+                        {
+                            command.CommandText = string.Format("INSERT INTO DanePomiaru (idPomiar, sila, ugiecie) VALUES({0},{1},{2})", idPomiar, pomiar.Siła, pomiar.Ugięcie);
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 }
             }
         }
