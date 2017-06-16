@@ -219,10 +219,12 @@ namespace NestorApplication.TabPages
                 axUgiecie.Labels.Add(Math.Abs(pomiar.Ugięcie).ToString());
             }
 
+            chartSilaDoUgiecia.Series.Clear();
             chartSilaDoUgiecia.Series.Add(seriaSiła);
             chartSilaDoUgiecia.AxisX.Add(axUgiecie);
             chartSilaDoUgiecia.LegendLocation = LegendLocation.Right;
 
+            chartUgiecieDoSily.Series.Clear();
             chartUgiecieDoSily.Series.Add(seriaUgięcie);
             chartUgiecieDoSily.AxisX.Add(axSila);
             chartUgiecieDoSily.LegendLocation = LegendLocation.Right;
