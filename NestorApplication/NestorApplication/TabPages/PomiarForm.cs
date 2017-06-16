@@ -7,6 +7,7 @@ using NestorApplication.Common;
 using LiveCharts.Wpf;
 using LiveCharts;
 using System.Linq;
+using System.Drawing;
 
 namespace NestorApplication.TabPages
 {
@@ -16,10 +17,11 @@ namespace NestorApplication.TabPages
         private List<DanePomiaru> _measures = new List<DanePomiaru>();
         private MainForm _mainForm;
         private BindingSource _bindingSource = new BindingSource();
+        private Bitmap _bitmap;
 
         // TODO - delete
-        private bool _oneLoopStart = false;
-        private bool _oneLoopStop = false;
+        // private bool _oneLoopStart = false;
+        // private bool _oneLoopStop = false;
 
         public PomiarForm(MainForm mainForm)
         {
@@ -50,12 +52,12 @@ namespace NestorApplication.TabPages
 
         public void StartMeasure()
         {
-            if (!_oneLoopStart)
+            // if (!_oneLoopStart)
             {
                 lock (_synch)
                 {
                     lbPomiarInfo.Text = "Trwa pomiar... Proszę czekać.";
-                    lbPomiarInfo.ForeColor = System.Drawing.Color.Red;
+                    lbPomiarInfo.ForeColor = Color.Red;
                     CleanGrid();
                     tbIloscPunktowPomiarowych.Enabled = false;
                     btnZeruj.Enabled = false;
@@ -63,12 +65,12 @@ namespace NestorApplication.TabPages
                     btnZapisz.Enabled = false;
                 }
             }
-            _oneLoopStart = true;
+            // _oneLoopStart = true;
         }
 
         public void UpdateMeasure(SensorEntry entry)
         {
-            if (!_oneLoopStop)
+            // if (!_oneLoopStop)
             {
                 lock (_synch)
                 {
@@ -81,7 +83,7 @@ namespace NestorApplication.TabPages
 
         public void StopMeasure()
         {
-            if (_oneLoopStart && !_oneLoopStop)
+            // if (_oneLoopStart && !_oneLoopStop)
             {
                 lock (_synch)
                 {
@@ -93,7 +95,7 @@ namespace NestorApplication.TabPages
                     UpdateViewStop();
                 }
             }
-            _oneLoopStop = true;
+            // _oneLoopStop = true;
         }
 
         private void btnZeruj_Click(object sender, EventArgs e)
@@ -104,7 +106,22 @@ namespace NestorApplication.TabPages
 
         private void btnWydruk_Click(object sender, EventArgs e)
         {
+            printMeasures.DefaultPageSettings.Landscape = true;
+            printMeasures.DefaultPageSettings.Margins.Top = 30;
+            printMeasures.DefaultPageSettings.Margins.Bottom = 30;
+            printMeasures.DefaultPageSettings.Margins.Left = 30;
+            printMeasures.DefaultPageSettings.Margins.Right = 30;
 
+            Graphics gr = CreateGraphics();
+            _bitmap = new Bitmap(Size.Width - 20, Size.Height - 10, gr);
+            Graphics screen = Graphics.FromImage(_bitmap);
+            screen.CopyFromScreen(_mainForm.Left + 20, _mainForm.Top + 60, 0, 0, Size);
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void printMeasures_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(_bitmap, 0, 0);
         }
 
         private void btnZapisz_Click(object sender, EventArgs e)
@@ -224,7 +241,7 @@ namespace NestorApplication.TabPages
         private void UpdateViewStop()
         {
             lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia...";
-            lbPomiarInfo.ForeColor = System.Drawing.Color.Black;
+            lbPomiarInfo.ForeColor = Color.Black;
             tbIloscPunktowPomiarowych.Enabled = true;
             btnZeruj.Enabled = true;
             btnWydruk.Enabled = true;
