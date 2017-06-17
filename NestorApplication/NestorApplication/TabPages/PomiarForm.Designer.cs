@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PomiarForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -195,8 +195,8 @@
             // Procent
             // 
             this.Procent.DataPropertyName = "Procent";
-            dataGridViewCellStyle2.Format = "N2";
-            this.Procent.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "N2";
+            this.Procent.DefaultCellStyle = dataGridViewCellStyle3;
             this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
             this.Procent.Name = "Procent";
             this.Procent.ReadOnly = true;
@@ -246,23 +246,25 @@
             // textBoxNacisk
             // 
             this.textBoxNacisk.AcceptsReturn = true;
-            this.textBoxNacisk.Location = new System.Drawing.Point(120, 19);
+            this.textBoxNacisk.Location = new System.Drawing.Point(138, 19);
             this.textBoxNacisk.Name = "textBoxNacisk";
-            this.textBoxNacisk.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNacisk.ReadOnly = true;
+            this.textBoxNacisk.Size = new System.Drawing.Size(74, 20);
             this.textBoxNacisk.TabIndex = 22;
             // 
             // textBoxDroga
             // 
             this.textBoxDroga.AcceptsReturn = true;
-            this.textBoxDroga.Location = new System.Drawing.Point(314, 19);
+            this.textBoxDroga.Location = new System.Drawing.Point(292, 19);
             this.textBoxDroga.Name = "textBoxDroga";
-            this.textBoxDroga.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDroga.ReadOnly = true;
+            this.textBoxDroga.Size = new System.Drawing.Size(72, 20);
             this.textBoxDroga.TabIndex = 23;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 22);
+            this.label6.Location = new System.Drawing.Point(92, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 24;
@@ -271,7 +273,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(240, 22);
+            this.label7.Location = new System.Drawing.Point(218, 22);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 25;
@@ -293,6 +295,7 @@
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Podgląd na żywo";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // splitContainer1
             // 

@@ -18,6 +18,7 @@ namespace NestorApplication.TabPages
         private MainForm _mainForm;
         private BindingSource _bindingSource = new BindingSource();
         private Bitmap _bitmap;
+        private MovingAverage avgSiła = new MovingAverage();
 
         // TODO - delete
         // private bool _oneLoopStart = false;
@@ -74,12 +75,18 @@ namespace NestorApplication.TabPages
             {
                 lock (_synch)
                 {
-                    textBoxNacisk.Text = entry.Tens.ToString();
-                    textBoxDroga.Text = entry.Offset.ToString();
-                    _measures.Add(_mainForm.Processor.ProcessDataEntry(entry));
+                    var measure = _mainForm.Processor.ProcessDataEntry(entry);
+
+                    avgSiła.ComputeAverage((int)measure.Siła);
+                    textBoxNacisk.Text = avgSiła.Average.ToString();
+                    textBoxDroga.Text = measure.Ugięcie.ToString();
+                   
+                    _measures.Add(measure);
+
                 }
             }
         }
+       
 
         public void StopMeasure()
         {
@@ -89,7 +96,7 @@ namespace NestorApplication.TabPages
                 {
                     int count = 20;
                     int.TryParse(tbIloscPunktowPomiarowych.Text, out count);
-                    List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasures(_measures, count);
+                    List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasuresBySzymon(_measures, count);
                     UpdateChart(filteredMeasures, count);
                     UpdateGrid(filteredMeasures);
                     UpdateViewStop();
@@ -249,6 +256,16 @@ namespace NestorApplication.TabPages
             btnWydruk.Enabled = true;
             btnZapisz.Enabled = true;
             dgvDanePomiaru.Focus();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

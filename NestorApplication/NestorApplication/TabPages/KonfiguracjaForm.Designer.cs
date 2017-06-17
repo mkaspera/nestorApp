@@ -31,7 +31,6 @@
             this.lbKonfiguracja = new System.Windows.Forms.Label();
             this.btnZapisz = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbPortCOM = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbBaudrate = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +42,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tbCzuloscStart = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.cbPortCOM = new System.Windows.Forms.ComboBox();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.labelSensorInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbKonfiguracja
@@ -74,13 +76,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Port COM:";
             // 
-            // tbPortCOM
-            // 
-            this.tbPortCOM.Location = new System.Drawing.Point(124, 38);
-            this.tbPortCOM.Name = "tbPortCOM";
-            this.tbPortCOM.Size = new System.Drawing.Size(64, 20);
-            this.tbPortCOM.TabIndex = 5;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -92,9 +87,9 @@
             // 
             // tbBaudrate
             // 
-            this.tbBaudrate.Location = new System.Drawing.Point(124, 67);
+            this.tbBaudrate.Location = new System.Drawing.Point(124, 65);
             this.tbBaudrate.Name = "tbBaudrate";
-            this.tbBaudrate.Size = new System.Drawing.Size(64, 20);
+            this.tbBaudrate.Size = new System.Drawing.Size(77, 20);
             this.tbBaudrate.TabIndex = 7;
             // 
             // label3
@@ -108,9 +103,9 @@
             // 
             // tbSkalaTensometr
             // 
-            this.tbSkalaTensometr.Location = new System.Drawing.Point(124, 97);
+            this.tbSkalaTensometr.Location = new System.Drawing.Point(124, 95);
             this.tbSkalaTensometr.Name = "tbSkalaTensometr";
-            this.tbSkalaTensometr.Size = new System.Drawing.Size(64, 20);
+            this.tbSkalaTensometr.Size = new System.Drawing.Size(77, 20);
             this.tbSkalaTensometr.TabIndex = 9;
             // 
             // label4
@@ -126,13 +121,13 @@
             // 
             this.tbSkalaDroga.Location = new System.Drawing.Point(124, 126);
             this.tbSkalaDroga.Name = "tbSkalaDroga";
-            this.tbSkalaDroga.Size = new System.Drawing.Size(64, 20);
+            this.tbSkalaDroga.Size = new System.Drawing.Size(77, 20);
             this.tbSkalaDroga.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 100);
+            this.label5.Location = new System.Drawing.Point(207, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(170, 13);
             this.label5.TabIndex = 12;
@@ -141,7 +136,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(194, 129);
+            this.label6.Location = new System.Drawing.Point(207, 129);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 13);
             this.label6.TabIndex = 13;
@@ -160,17 +155,43 @@
             // 
             this.tbCzuloscStart.Location = new System.Drawing.Point(124, 156);
             this.tbCzuloscStart.Name = "tbCzuloscStart";
-            this.tbCzuloscStart.Size = new System.Drawing.Size(64, 20);
+            this.tbCzuloscStart.Size = new System.Drawing.Size(77, 20);
             this.tbCzuloscStart.TabIndex = 15;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(194, 159);
+            this.label8.Location = new System.Drawing.Point(207, 159);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(139, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "(start po zdetektowaniu siły)";
+            // 
+            // cbPortCOM
+            // 
+            this.cbPortCOM.FormattingEnabled = true;
+            this.cbPortCOM.Location = new System.Drawing.Point(124, 33);
+            this.cbPortCOM.Name = "cbPortCOM";
+            this.cbPortCOM.Size = new System.Drawing.Size(77, 21);
+            this.cbPortCOM.TabIndex = 17;
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(207, 33);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(58, 21);
+            this.refreshButton.TabIndex = 18;
+            this.refreshButton.Text = "Odśwież";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // labelSensorInfo
+            // 
+            this.labelSensorInfo.AutoSize = true;
+            this.labelSensorInfo.Location = new System.Drawing.Point(271, 36);
+            this.labelSensorInfo.Name = "labelSensorInfo";
+            this.labelSensorInfo.Size = new System.Drawing.Size(0, 13);
+            this.labelSensorInfo.TabIndex = 19;
             // 
             // KonfiguracjaForm
             // 
@@ -178,6 +199,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(477, 488);
+            this.Controls.Add(this.labelSensorInfo);
+            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.cbPortCOM);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbCzuloscStart);
             this.Controls.Add(this.label7);
@@ -189,7 +213,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbBaudrate);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbPortCOM);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnZapisz);
             this.Controls.Add(this.lbKonfiguracja);
@@ -205,7 +228,6 @@
         private System.Windows.Forms.Label lbKonfiguracja;
         private System.Windows.Forms.Button btnZapisz;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbPortCOM;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbBaudrate;
         private System.Windows.Forms.Label label3;
@@ -217,5 +239,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbCzuloscStart;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbPortCOM;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Label labelSensorInfo;
     }
 }

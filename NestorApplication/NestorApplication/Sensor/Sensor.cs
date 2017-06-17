@@ -73,6 +73,27 @@ namespace NestorApplication.Sensor
                     _mainForm.UpdateMeasure(sensorEntry);
                 }
             }
+            else if (inData.StartsWith("info>"))
+            {
+                string data = inData.Substring(5);
+                dynamic stuff;
+                try
+                {
+                    stuff = JsonConvert.DeserializeObject(data);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+
+                SensorInfo sensorInfo;
+                sensorInfo.version = stuff.version;
+                sensorInfo.compiled = stuff.compiled;
+
+               _mainForm.UpdateSensorInfo (sensorInfo);
+               
+            }
         }
 
         public void Open()
