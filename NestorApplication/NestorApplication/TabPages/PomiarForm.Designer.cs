@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PomiarForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,8 +61,6 @@
             this.lbPomiarInfo = new System.Windows.Forms.Label();
             this.btnWydruk = new System.Windows.Forms.Button();
             this.pomiarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.printMeasures = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanePomiaru)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.danePomiaruBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -195,8 +192,8 @@
             // Procent
             // 
             this.Procent.DataPropertyName = "Procent";
-            dataGridViewCellStyle2.Format = "N2";
-            this.Procent.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "N2";
+            this.Procent.DefaultCellStyle = dataGridViewCellStyle1;
             this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
             this.Procent.Name = "Procent";
             this.Procent.ReadOnly = true;
@@ -383,22 +380,6 @@
             // 
             this.pomiarBindingSource.DataSource = typeof(NestorRepository.Entities.Pomiar);
             // 
-            // printMeasures
-            // 
-            this.printMeasures.OriginAtMargins = true;
-            this.printMeasures.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printMeasures_PrintPage);
-            // 
-            // printPreviewDialog
-            // 
-            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog.Document = this.printMeasures;
-            this.printPreviewDialog.Enabled = true;
-            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = "printPreviewDialog1";
-            this.printPreviewDialog.Visible = false;
-            // 
             // PomiarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,7 +452,5 @@
         private LiveCharts.WinForms.CartesianChart chartUgiecieDoSily;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Drawing.Printing.PrintDocument printMeasures;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
     }
 }

@@ -8,6 +8,9 @@ using LiveCharts.Wpf;
 using LiveCharts;
 using System.Linq;
 using System.Drawing;
+using System.IO;
+using Microsoft.Reporting.WinForms;
+using System.Data;
 
 namespace NestorApplication.TabPages
 {
@@ -17,8 +20,7 @@ namespace NestorApplication.TabPages
         private List<DanePomiaru> _measures = new List<DanePomiaru>();
         private MainForm _mainForm;
         private BindingSource _bindingSource = new BindingSource();
-        private Bitmap _bitmap;
-
+        
         // TODO - delete
         // private bool _oneLoopStart = false;
         // private bool _oneLoopStop = false;
@@ -106,22 +108,75 @@ namespace NestorApplication.TabPages
 
         private void btnWydruk_Click(object sender, EventArgs e)
         {
-            printMeasures.DefaultPageSettings.Landscape = true;
-            printMeasures.DefaultPageSettings.Margins.Top = 30;
-            printMeasures.DefaultPageSettings.Margins.Bottom = 30;
-            printMeasures.DefaultPageSettings.Margins.Left = 30;
-            printMeasures.DefaultPageSettings.Margins.Right = 30;
+            try
+            {
+                lbPomiarInfo.Text = "Przygotowywanie wydruku... Proszę czekać.";
+                lbPomiarInfo.ForeColor = Color.Red;
 
-            Graphics gr = CreateGraphics();
-            _bitmap = new Bitmap(Size.Width - 20, Size.Height - 10, gr);
-            Graphics screen = Graphics.FromImage(_bitmap);
-            screen.CopyFromScreen(_mainForm.Left + 20, _mainForm.Top + 60, 0, 0, Size);
-            printPreviewDialog.ShowDialog();
-        }
+                Klient klient = (Klient)cbKlient.SelectedValue;
+                Produkt produkt = (Produkt)cbProdukt.SelectedValue;
+                Sprezyna sprezyna = (Sprezyna)cbSprezyna.SelectedValue;
+                Drut drut = (Drut)cbDrut.SelectedValue;
+                IList<DanePomiaru> pomiary = (IList<DanePomiaru>)_bindingSource.List;
 
-        private void printMeasures_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            e.Graphics.DrawImage(_bitmap, 0, 0);
+                string message = string.Empty;
+                bool valid = MeasureHelper.Validate(true, klient, produkt, sprezyna, drut, pomiary, out message);
+                if (!valid)
+                {
+                    MessageBox.Show(message, "Poprawność danych");
+                    return;
+                }
+
+                const string FolderName = "Wydruki";
+                DateTime now = DateTime.Now;
+                string executablePath = Environment.CurrentDirectory + Path.DirectorySeparatorChar;
+                string date = DateTime.Now.ToShortDateString();
+
+                ReportViewer reportViewer = new ReportViewer();
+                reportViewer.LocalReport.ReportPath = executablePath + "Report\\MeasureReport.rdlc";
+
+                ReportParameter data = new ReportParameter("Data", date);
+                ReportParameter nazwaKlienta = new ReportParameter("NazwaKlienta", klient.Nazwa);
+                ReportParameter logoKlienta = new ReportParameter("LogoKlienta", klient.Logo);
+                ReportParameter nazwaProduktu = new ReportParameter("NazwaProduktu", produkt.Nazwa);
+                ReportParameter wysokoscPoczatkowa = new ReportParameter("WysokoscPoczatkowa", produkt.Wysokość.ToString());
+                ReportParameter wysokoscPoczatkowaSprezyn = new ReportParameter("WysokoscPoczatkowaSprezyn", sprezyna.WysokośćPoczątkowa.ToString());
+                ReportParameter liczbaZwoi = new ReportParameter("LiczbaZwoi", sprezyna.LiczbaZwoi.ToString());
+                ReportParameter srednicaDrutu = new ReportParameter("SrednicaDrutu", drut.Średnica.ToString());
+
+                reportViewer.LocalReport.SetParameters(
+                    new ReportParameter[] { data, nazwaKlienta, logoKlienta, nazwaProduktu, wysokoscPoczatkowa, wysokoscPoczatkowaSprezyn, liczbaZwoi, srednicaDrutu }
+                );
+
+                reportViewer.LocalReport.DataSources.Clear();
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("Measures", _bindingSource));
+
+                if (!Directory.Exists(executablePath + FolderName))
+                {
+                    Directory.CreateDirectory(executablePath + FolderName);
+                }
+
+                byte[] byteViewer = reportViewer.LocalReport.Render("PDF");
+                string fileName = string.Concat(now.ToString("yyyyMMdd_HHmmss"), ".pdf");
+
+                string path = executablePath + FolderName + Path.DirectorySeparatorChar + fileName;
+                FileStream reportFile = new FileStream(path, FileMode.Create);
+                reportFile.Write(byteViewer, 0, byteViewer.Length);
+                reportFile.Flush();
+                reportFile.Close();
+
+                DialogResult dr = MessageBox.Show("Czy otworzyć zapisany wydruk ?", "Wydruk", MessageBoxButtons.YesNo);
+                if (dr == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(@path);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString(), "Błąd podczas generowania wydruku.", MessageBoxButtons.OK);
+            }
+            lbPomiarInfo.Text = "Oczekiwanie na pomiar z urządzenia...";
+            lbPomiarInfo.ForeColor = Color.Black;
         }
 
         private void btnZapisz_Click(object sender, EventArgs e)
