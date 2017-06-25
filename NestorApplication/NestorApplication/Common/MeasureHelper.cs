@@ -9,38 +9,7 @@ namespace NestorApplication.Common
 {
     public static class MeasureHelper
     {
-        public static List<DanePomiaru> PrepareMeasures(List<DanePomiaru> measures, int count)
-        {
-            List<DanePomiaru> filteredMeasures = new List<DanePomiaru>();
-            int offset = measures.Count / count;
-
-            for (int i = 0; i < count; i++)
-            {
-                int indx = i * offset;
-                if (indx > measures.Count)
-                {
-                    indx = measures.Count;
-                }
-
-                DanePomiaru measure = measures[i * offset];
-                measure.Próba = i + 1;
-                measure.Procent = measure.Ugięcie != 0 ? measure.Siła / measure.Ugięcie * 100 : 0;
-                filteredMeasures.Add(measure);
-            }
-
-            return filteredMeasures;
-        }
-
-        
-        
-        // TODO - decide which version
-        private static int GetClosestIndex(List<DanePomiaru> list, DanePomiaru targetvalue)
-        { 
-            return list.IndexOf(list.OrderBy(d => Math.Abs(d.Ugięcie - targetvalue.Ugięcie)).ElementAt(0));
-        }
-        
-        // TODO - decide which version
-        public static List<DanePomiaru> PrepareMeasuresBySzymon(List<DanePomiaru> measurementList, int datapoints)
+        public static List<DanePomiaru> PrepareMeasures(List<DanePomiaru> measurementList, int datapoints)
         {
             if (measurementList.Count == 0)
             {
@@ -115,27 +84,10 @@ namespace NestorApplication.Common
             MessageBox.Show(result ? "Pomyślnie zapisano zmiany." : "Nie udało się zapisać danych. Spróbuj ponownie.", "Zapis danych");
             return result;
         }
-    }
 
-    public class MovingAverage
-    {
-        private Queue<int> samples = new Queue<int>();
-        private int windowSize = 10;
-        private int sampleAccumulator;
-        public int Average { get; private set; }
-
-      
-        public void ComputeAverage(int newSample)
+        private static int GetClosestIndex(List<DanePomiaru> list, DanePomiaru targetvalue)
         {
-            sampleAccumulator += newSample;
-            samples.Enqueue(newSample);
-
-            if (samples.Count > windowSize)
-            {
-                sampleAccumulator -= samples.Dequeue();
-            }
-
-            Average = sampleAccumulator / samples.Count;
+            return list.IndexOf(list.OrderBy(d => Math.Abs(d.Ugięcie - targetvalue.Ugięcie)).ElementAt(0));
         }
     }
 }

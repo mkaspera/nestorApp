@@ -10,7 +10,6 @@ using System.Linq;
 using System.Drawing;
 using System.IO;
 using Microsoft.Reporting.WinForms;
-using System.Data;
 
 namespace NestorApplication.TabPages
 {
@@ -88,7 +87,6 @@ namespace NestorApplication.TabPages
                 }
             }
         }
-       
 
         public void StopMeasure()
         {
@@ -98,7 +96,7 @@ namespace NestorApplication.TabPages
                 {
                     int count = 20;
                     int.TryParse(tbIloscPunktowPomiarowych.Text, out count);
-                    List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasuresBySzymon(_measures, count);
+                    List<DanePomiaru> filteredMeasures = MeasureHelper.PrepareMeasures(_measures, count);
                     UpdateChart(filteredMeasures, count);
                     UpdateGrid(filteredMeasures);
                     UpdateViewStop();
@@ -311,16 +309,6 @@ namespace NestorApplication.TabPages
             btnWydruk.Enabled = true;
             btnZapisz.Enabled = true;
             dgvDanePomiaru.Focus();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

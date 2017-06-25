@@ -43,7 +43,7 @@
             this.tbCzuloscStart = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbPortCOM = new System.Windows.Forms.ComboBox();
-            this.refreshButton = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.labelSensorInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -175,15 +175,15 @@
             this.cbPortCOM.Size = new System.Drawing.Size(77, 21);
             this.cbPortCOM.TabIndex = 17;
             // 
-            // refreshButton
+            // btnRefresh
             // 
-            this.refreshButton.Location = new System.Drawing.Point(207, 33);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(58, 21);
-            this.refreshButton.TabIndex = 18;
-            this.refreshButton.Text = "Odśwież";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.button1_Click);
+            this.btnRefresh.Location = new System.Drawing.Point(207, 33);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(58, 21);
+            this.btnRefresh.TabIndex = 18;
+            this.btnRefresh.Text = "Odśwież";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // labelSensorInfo
             // 
@@ -200,7 +200,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(477, 488);
             this.Controls.Add(this.labelSensorInfo);
-            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.cbPortCOM);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbCzuloscStart);
@@ -240,7 +240,7 @@
         private System.Windows.Forms.TextBox tbCzuloscStart;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbPortCOM;
-        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label labelSensorInfo;
     }
 }

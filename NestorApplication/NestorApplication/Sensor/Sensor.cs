@@ -88,8 +88,8 @@ namespace NestorApplication.Sensor
                 }
 
                 SensorInfo sensorInfo;
-                sensorInfo.version = stuff.version;
-                sensorInfo.compiled = stuff.compiled;
+                sensorInfo.Version = stuff.version;
+                sensorInfo.Compiled = stuff.compiled;
 
                _mainForm.UpdateSensorInfo (sensorInfo);
                

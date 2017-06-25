@@ -15,18 +15,18 @@ namespace NestorApplication.TabPages
             InitializeComponent();
             _mainForm.ConfigurationParameter.Read();
             GetComPorts();
-
             AssignParameter();
+        }
+        
+        public void SetFocus()
+        {
+            cbPortCOM.Focus();
         }
 
         private void GetComPorts()
         {
             cbPortCOM.Items.Clear();
             cbPortCOM.Items.AddRange(SerialPort.GetPortNames());
-        }
-        public void SetFocus()
-        {
-            cbPortCOM.Focus();
         }
 
         private void AssignParameter()
@@ -38,20 +38,20 @@ namespace NestorApplication.TabPages
             tbCzuloscStart.Text = _mainForm.ConfigurationParameter.CzuloscStart;
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            GetComPorts();
+        }
+
         private void btnZapisz_Click(object sender, EventArgs e)
         {
             _mainForm.ConfigurationParameter.Save(cbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text);
             MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GetComPorts();
-        }
-
         public void UpdateSensorInfo(SensorInfo entry)
         {
-            labelSensorInfo.Text = "Sensor:" + entry.version + " [compiled at " + entry.compiled + "]";
+            labelSensorInfo.Text = "Sensor:" + entry.Version + " [compiled at " + entry.Compiled + "]";
         }
     }
 }
