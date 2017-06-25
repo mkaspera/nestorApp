@@ -56,7 +56,7 @@ namespace NestorApplication.Sensor
                 Ugięcie = (entry.Offset - ZeroOffset) / DistanceScale,
             };
 
-            if (Math.Abs(measure.Siła) > StartLevelGrams && !_measurementInProgress)
+            if (Math.Abs(measure.Siła) > StartLevelGrams && !_measurementInProgress && Math.Abs(measure.Ugięcie) != 0)
             {
                 _measurementInProgress = true;
                 _offsetSameSince = 0;
@@ -74,7 +74,7 @@ namespace NestorApplication.Sensor
             }
 
             // 100 ostatnich pomiarów offset jest stały 
-            if (_offsetSameSince > 20 && _measurementInProgress)
+            if (_offsetSameSince > 40 && _measurementInProgress)
             {
                 _measurementInProgress = false;
                 _mainForm.StopMeasure();

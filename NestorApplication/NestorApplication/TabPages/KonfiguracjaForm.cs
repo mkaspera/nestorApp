@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NestorApplication.Sensor;
+using System;
+using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace NestorApplication.TabPages
@@ -12,17 +14,24 @@ namespace NestorApplication.TabPages
             _mainForm = mainForm;
             InitializeComponent();
             _mainForm.ConfigurationParameter.Read();
+            GetComPorts();
+
             AssignParameter();
         }
 
+        private void GetComPorts()
+        {
+            cbPortCOM.Items.Clear();
+            cbPortCOM.Items.AddRange(SerialPort.GetPortNames());
+        }
         public void SetFocus()
         {
-            tbPortCOM.Focus();
+            cbPortCOM.Focus();
         }
 
         private void AssignParameter()
         {
-            tbPortCOM.Text = _mainForm.ConfigurationParameter.PortCOM;
+            cbPortCOM.Text = _mainForm.ConfigurationParameter.PortCOM;
             tbBaudrate.Text = _mainForm.ConfigurationParameter.Baudrate;
             tbSkalaTensometr.Text = _mainForm.ConfigurationParameter.SkalaTensometr;
             tbSkalaDroga.Text = _mainForm.ConfigurationParameter.SkalaDroga;
@@ -31,8 +40,18 @@ namespace NestorApplication.TabPages
 
         private void btnZapisz_Click(object sender, EventArgs e)
         {
-            _mainForm.ConfigurationParameter.Save(tbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text);
+            _mainForm.ConfigurationParameter.Save(cbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text);
             MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetComPorts();
+        }
+
+        public void UpdateSensorInfo(SensorInfo entry)
+        {
+            labelSensorInfo.Text = "Sensor:" + entry.version + " [compiled at " + entry.compiled + "]";
         }
     }
 }

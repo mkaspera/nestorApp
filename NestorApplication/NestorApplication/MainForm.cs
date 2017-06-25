@@ -129,6 +129,22 @@ namespace NestorApplication
             { }
         }
 
+        public void UpdateSensorInfo(SensorInfo entry)
+        {
+            try
+            {
+                BeginInvoke(
+                    new EventHandler(delegate
+                    {
+                        _frmKonfiguracja.UpdateSensorInfo(entry);
+                       
+                    })
+                );
+            }
+            catch (Exception)
+            { }
+        }
+
         private void MainForm_Shown(object sender, EventArgs e)
         {
             _frmKonfiguracja.SetFocus();
@@ -140,6 +156,8 @@ namespace NestorApplication
             {
                 case 0:
                     _frmKonfiguracja.SetFocus();
+                    _sensor.Close();
+                    _sensor.Open();
                     break;
                 case 1:
                     _frmKlienci.SetFocus();

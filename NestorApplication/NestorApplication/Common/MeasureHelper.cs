@@ -31,9 +31,11 @@ namespace NestorApplication.Common
             return filteredMeasures;
         }
 
+        
+        
         // TODO - decide which version
         private static int GetClosestIndex(List<DanePomiaru> list, DanePomiaru targetvalue)
-        {
+        { 
             return list.IndexOf(list.OrderBy(d => Math.Abs(d.Ugięcie - targetvalue.Ugięcie)).ElementAt(0));
         }
         
@@ -62,6 +64,8 @@ namespace NestorApplication.Common
             for (int i = 0; i < datapoints; i++)
             {
                 int idx = GetClosestIndex(measurementList, new DanePomiaru { Ugięcie = presentPoint });
+                measurementList[idx].Próba = i + 1;
+                measurementList[idx].Procent = max != 0 ? (measurementList[idx].Ugięcie/ max) * 100 : 0;
                 normalizedList.Add(measurementList[idx]);
                 presentPoint += distBetweenPoint;
             }
@@ -110,6 +114,28 @@ namespace NestorApplication.Common
             bool result = DatabaseHelper.AddPomiar(pomiar.Klient, pomiar.Produkt, pomiar.Sprezyna, pomiar.Drut, DateTime.Now, pomiar.IloscPunktowPomiarowych, pomiar.Pomiary);
             MessageBox.Show(result ? "Pomyślnie zapisano zmiany." : "Nie udało się zapisać danych. Spróbuj ponownie.", "Zapis danych");
             return result;
+        }
+    }
+
+    public class MovingAverage
+    {
+        private Queue<int> samples = new Queue<int>();
+        private int windowSize = 10;
+        private int sampleAccumulator;
+        public int Average { get; private set; }
+
+      
+        public void ComputeAverage(int newSample)
+        {
+            sampleAccumulator += newSample;
+            samples.Enqueue(newSample);
+
+            if (samples.Count > windowSize)
+            {
+                sampleAccumulator -= samples.Dequeue();
+            }
+
+            Average = sampleAccumulator / samples.Count;
         }
     }
 }
