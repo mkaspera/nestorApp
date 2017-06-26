@@ -122,7 +122,11 @@ namespace NestorApplication.TabPages
                 Produkt produkt = (Produkt)cbProdukt.SelectedValue;
                 Sprezyna sprezyna = (Sprezyna)cbSprezyna.SelectedValue;
                 Drut drut = (Drut)cbDrut.SelectedValue;
-                IList<DanePomiaru> pomiary = (IList<DanePomiaru>)_bindingSource.List;
+                IList<DanePomiaru> pomiary = new List<DanePomiaru>();
+                if (_bindingSource.List.Count > 0)
+                {
+                    pomiary = (IList<DanePomiaru>)_bindingSource.List;
+                }
 
                 string message = string.Empty;
                 bool valid = MeasureHelper.Validate(true, klient, produkt, sprezyna, drut, pomiary, out message);
