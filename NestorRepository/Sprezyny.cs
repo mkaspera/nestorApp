@@ -28,5 +28,10 @@ namespace NestorRepository
 
             return sprezyny;
         }
+
+        public static Sprezyna GetSprezyna(int id, List<Sprezyna> sprezyny)
+        {
+            return sprezyny.Find(x => x.Id == id);
+        }
     }
 }

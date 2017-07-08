@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\PrintMeasure.cs" />
     <Compile Include="Sensor\DataEntryProcessor.cs" />
     <Compile Include="Sensor\Sensor.cs" />
     <Compile Include="Sensor\SensorEntry.cs" />

@@ -25,5 +25,10 @@ namespace NestorRepository
             
             return klienci;
         }
+
+        public static Klient GetKlient(int id, List<Klient> klienci)
+        {
+            return klienci.Find(x => x.Id == id);
+        }
     }
 }

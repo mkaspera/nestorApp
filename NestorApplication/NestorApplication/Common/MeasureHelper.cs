@@ -16,25 +16,20 @@ namespace NestorApplication.Common
                 return null;
             }
 
-            int min = int.MaxValue, max = int.MinValue;
-            foreach (DanePomiaru data in measurementList)
-            {
-                int offset = (int)data.Ugięcie;
-                if (min > offset) min = offset;
-                if (max < offset) max = offset;
-            }
-
-            int range = max - min;
-            int distBetweenPoint = range / datapoints;
+            double minUgiecie = measurementList.Min(x => x.Ugięcie);
+            double maxUgiecie = measurementList.Max(x => x.Ugięcie);
+            
+            double range = maxUgiecie - minUgiecie;
+            double distBetweenPoint = range / datapoints;
 
             List<DanePomiaru> normalizedList = new List<DanePomiaru>();
 
-            int presentPoint = min;
+            double presentPoint = minUgiecie;
             for (int i = 0; i < datapoints; i++)
             {
                 int idx = GetClosestIndex(measurementList, new DanePomiaru { Ugięcie = presentPoint });
                 measurementList[idx].Próba = i + 1;
-                measurementList[idx].Procent = max != 0 ? (measurementList[idx].Ugięcie/ max) * 100 : 0;
+                measurementList[idx].Procent = maxUgiecie != 0 ? (measurementList[idx].Ugięcie/ maxUgiecie) * 100 : 0;
                 normalizedList.Add(measurementList[idx]);
                 presentPoint += distBetweenPoint;
             }

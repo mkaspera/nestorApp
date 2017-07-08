@@ -29,5 +29,10 @@ namespace NestorRepository
 
             return produkty;
         }
+
+        public static Produkt GetProdukt(int id, List<Produkt> produkty)
+        {
+            return produkty.Find(x => x.Id == id);
+        }
     }
 }

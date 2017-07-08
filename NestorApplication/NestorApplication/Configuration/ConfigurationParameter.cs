@@ -12,6 +12,7 @@ namespace NestorApplication.Configuration
         public string SkalaTensometr { get; set; }
         public string SkalaDroga { get; set; }
         public string CzuloscStart { get; set; }
+        public string TimeoutPomiar { get; set; }
 
         public void Read()
         {
@@ -22,15 +23,17 @@ namespace NestorApplication.Configuration
             SkalaTensometr = dbParameters.FirstOrDefault(x => x.Nazwa == "SkalaTensometr").Wartosc;
             SkalaDroga = dbParameters.FirstOrDefault(x => x.Nazwa == "SkalaDroga").Wartosc;
             CzuloscStart = dbParameters.FirstOrDefault(x => x.Nazwa == "CzuloscStart").Wartosc;
+            TimeoutPomiar = dbParameters.FirstOrDefault(x => x.Nazwa == "TimeoutPomiar").Wartosc;
         }
 
-        public void Save(string portCOM, string baudrate, string skalaTensometr, string skalaDroga, string czuloscStart)
+        public void Save(string portCOM, string baudrate, string skalaTensometr, string skalaDroga, string czuloscStart, string timeoutPomiar)
         {
             PortCOM = portCOM;
             Baudrate = baudrate;
             SkalaTensometr = skalaTensometr;
             SkalaDroga = skalaDroga;
             CzuloscStart = czuloscStart;
+            TimeoutPomiar = timeoutPomiar;
 
             List<Parametr> dbParameters = new List<Parametr>();
             dbParameters.Add(new Parametr { Nazwa = "PortCOM", Wartosc = PortCOM });
@@ -38,6 +41,7 @@ namespace NestorApplication.Configuration
             dbParameters.Add(new Parametr { Nazwa = "SkalaTensometr", Wartosc = SkalaTensometr });
             dbParameters.Add(new Parametr { Nazwa = "SkalaDroga", Wartosc = SkalaDroga });
             dbParameters.Add(new Parametr { Nazwa = "CzuloscStart", Wartosc = CzuloscStart });
+            dbParameters.Add(new Parametr { Nazwa = "TimeoutPomiar", Wartosc = TimeoutPomiar });
 
             DatabaseHelper.SaveParameters(dbParameters);
         }

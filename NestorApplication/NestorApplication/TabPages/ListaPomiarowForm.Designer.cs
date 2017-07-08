@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPomiarNaglowki = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.klient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.produkt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.drut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataPomiaru = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iloscPunktow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPomiarSzczegoly = new System.Windows.Forms.DataGridView();
+            this.proba = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sila = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ugiecie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Procent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbDrut = new System.Windows.Forms.ComboBox();
             this.cbSprezyna = new System.Windows.Forms.ComboBox();
             this.cbProdukt = new System.Windows.Forms.ComboBox();
@@ -52,9 +55,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.proba = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sila = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ugiecie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDrukuj = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idKlient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProdukt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idSprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDrut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.klient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.produkt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sprezyna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.drut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataPomiaru = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iloscPunktow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarNaglowki)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPomiarSzczegoly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -71,76 +83,27 @@
             // 
             this.dgvPomiarNaglowki.AllowUserToAddRows = false;
             this.dgvPomiarNaglowki.AllowUserToDeleteRows = false;
+            this.dgvPomiarNaglowki.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPomiarNaglowki.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPomiarNaglowki.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.idKlient,
+            this.idProdukt,
+            this.idSprezyna,
+            this.idDrut,
             this.klient,
             this.produkt,
             this.sprezyna,
             this.drut,
             this.dataPomiaru,
             this.iloscPunktow});
-            this.dgvPomiarNaglowki.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPomiarNaglowki.Location = new System.Drawing.Point(0, 0);
             this.dgvPomiarNaglowki.Name = "dgvPomiarNaglowki";
-            this.dgvPomiarNaglowki.Size = new System.Drawing.Size(1084, 205);
+            this.dgvPomiarNaglowki.Size = new System.Drawing.Size(1084, 175);
             this.dgvPomiarNaglowki.TabIndex = 0;
             this.dgvPomiarNaglowki.SelectionChanged += new System.EventHandler(this.dgvPomiarNaglowki_SelectionChanged);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            // 
-            // klient
-            // 
-            this.klient.DataPropertyName = "klient";
-            this.klient.HeaderText = "Klient";
-            this.klient.Name = "klient";
-            this.klient.ReadOnly = true;
-            this.klient.Width = 150;
-            // 
-            // produkt
-            // 
-            this.produkt.DataPropertyName = "produkt";
-            this.produkt.HeaderText = "Produkt";
-            this.produkt.Name = "produkt";
-            this.produkt.ReadOnly = true;
-            this.produkt.Width = 150;
-            // 
-            // sprezyna
-            // 
-            this.sprezyna.DataPropertyName = "sprezyna";
-            this.sprezyna.HeaderText = "Sprężyna";
-            this.sprezyna.Name = "sprezyna";
-            this.sprezyna.ReadOnly = true;
-            this.sprezyna.Width = 150;
-            // 
-            // drut
-            // 
-            this.drut.DataPropertyName = "drut";
-            this.drut.HeaderText = "Drut";
-            this.drut.Name = "drut";
-            this.drut.ReadOnly = true;
-            this.drut.Width = 150;
-            // 
-            // dataPomiaru
-            // 
-            this.dataPomiaru.DataPropertyName = "dataPomiaru";
-            this.dataPomiaru.HeaderText = "Data pomiaru";
-            this.dataPomiaru.Name = "dataPomiaru";
-            this.dataPomiaru.ReadOnly = true;
-            this.dataPomiaru.Width = 120;
-            // 
-            // iloscPunktow
-            // 
-            this.iloscPunktow.DataPropertyName = "iloscPunktow";
-            this.iloscPunktow.HeaderText = "Ilość punktów";
-            this.iloscPunktow.Name = "iloscPunktow";
-            this.iloscPunktow.ReadOnly = true;
-            this.iloscPunktow.Width = 75;
             // 
             // dgvPomiarSzczegoly
             // 
@@ -150,12 +113,44 @@
             this.dgvPomiarSzczegoly.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.proba,
             this.sila,
-            this.ugiecie});
+            this.ugiecie,
+            this.Procent});
             this.dgvPomiarSzczegoly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPomiarSzczegoly.Location = new System.Drawing.Point(0, 0);
             this.dgvPomiarSzczegoly.Name = "dgvPomiarSzczegoly";
             this.dgvPomiarSzczegoly.Size = new System.Drawing.Size(1084, 204);
             this.dgvPomiarSzczegoly.TabIndex = 1;
+            // 
+            // proba
+            // 
+            this.proba.DataPropertyName = "proba";
+            this.proba.HeaderText = "Próba";
+            this.proba.Name = "proba";
+            this.proba.ReadOnly = true;
+            this.proba.Width = 50;
+            // 
+            // sila
+            // 
+            this.sila.DataPropertyName = "sila";
+            this.sila.HeaderText = "Siła";
+            this.sila.Name = "sila";
+            this.sila.ReadOnly = true;
+            // 
+            // ugiecie
+            // 
+            this.ugiecie.DataPropertyName = "ugiecie";
+            this.ugiecie.HeaderText = "Ugięcie";
+            this.ugiecie.Name = "ugiecie";
+            this.ugiecie.ReadOnly = true;
+            // 
+            // Procent
+            // 
+            this.Procent.DataPropertyName = "procent";
+            dataGridViewCellStyle6.Format = "N2";
+            this.Procent.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Procent.HeaderText = "Procentowa Wartość Ugięcia";
+            this.Procent.Name = "Procent";
+            this.Procent.ReadOnly = true;
             // 
             // cbDrut
             // 
@@ -319,6 +314,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnDrukuj);
             this.splitContainer2.Panel1.Controls.Add(this.dgvPomiarNaglowki);
             // 
             // splitContainer2.Panel2
@@ -328,27 +324,109 @@
             this.splitContainer2.SplitterDistance = 205;
             this.splitContainer2.TabIndex = 2;
             // 
-            // proba
+            // btnDrukuj
             // 
-            this.proba.DataPropertyName = "proba";
-            this.proba.HeaderText = "Próba";
-            this.proba.Name = "proba";
-            this.proba.ReadOnly = true;
-            this.proba.Width = 50;
+            this.btnDrukuj.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDrukuj.Location = new System.Drawing.Point(3, 178);
+            this.btnDrukuj.Name = "btnDrukuj";
+            this.btnDrukuj.Size = new System.Drawing.Size(75, 23);
+            this.btnDrukuj.TabIndex = 26;
+            this.btnDrukuj.Text = "Drukuj";
+            this.btnDrukuj.UseVisualStyleBackColor = true;
+            this.btnDrukuj.Click += new System.EventHandler(this.btnDrukuj_Click);
             // 
-            // sila
+            // id
             // 
-            this.sila.DataPropertyName = "sila";
-            this.sila.HeaderText = "Siła";
-            this.sila.Name = "sila";
-            this.sila.ReadOnly = true;
+            this.id.DataPropertyName = "id";
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            this.id.DefaultCellStyle = dataGridViewCellStyle1;
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.Visible = false;
             // 
-            // ugiecie
+            // idKlient
             // 
-            this.ugiecie.DataPropertyName = "ugiecie";
-            this.ugiecie.HeaderText = "Ugięcie";
-            this.ugiecie.Name = "ugiecie";
-            this.ugiecie.ReadOnly = true;
+            this.idKlient.DataPropertyName = "idKlient";
+            dataGridViewCellStyle2.Format = "N0";
+            this.idKlient.DefaultCellStyle = dataGridViewCellStyle2;
+            this.idKlient.HeaderText = "idKlient";
+            this.idKlient.Name = "idKlient";
+            this.idKlient.Visible = false;
+            // 
+            // idProdukt
+            // 
+            this.idProdukt.DataPropertyName = "idProdukt";
+            dataGridViewCellStyle3.Format = "N0";
+            this.idProdukt.DefaultCellStyle = dataGridViewCellStyle3;
+            this.idProdukt.HeaderText = "idProdukt";
+            this.idProdukt.Name = "idProdukt";
+            this.idProdukt.Visible = false;
+            // 
+            // idSprezyna
+            // 
+            this.idSprezyna.DataPropertyName = "idSprezyna";
+            dataGridViewCellStyle4.Format = "N0";
+            this.idSprezyna.DefaultCellStyle = dataGridViewCellStyle4;
+            this.idSprezyna.HeaderText = "idSprezyna";
+            this.idSprezyna.Name = "idSprezyna";
+            this.idSprezyna.Visible = false;
+            // 
+            // idDrut
+            // 
+            this.idDrut.DataPropertyName = "idDrut";
+            dataGridViewCellStyle5.Format = "N0";
+            this.idDrut.DefaultCellStyle = dataGridViewCellStyle5;
+            this.idDrut.HeaderText = "idDrut";
+            this.idDrut.Name = "idDrut";
+            this.idDrut.Visible = false;
+            // 
+            // klient
+            // 
+            this.klient.DataPropertyName = "klient";
+            this.klient.HeaderText = "Klient";
+            this.klient.Name = "klient";
+            this.klient.ReadOnly = true;
+            this.klient.Width = 150;
+            // 
+            // produkt
+            // 
+            this.produkt.DataPropertyName = "produkt";
+            this.produkt.HeaderText = "Produkt";
+            this.produkt.Name = "produkt";
+            this.produkt.ReadOnly = true;
+            this.produkt.Width = 150;
+            // 
+            // sprezyna
+            // 
+            this.sprezyna.DataPropertyName = "sprezyna";
+            this.sprezyna.HeaderText = "Sprężyna";
+            this.sprezyna.Name = "sprezyna";
+            this.sprezyna.ReadOnly = true;
+            this.sprezyna.Width = 150;
+            // 
+            // drut
+            // 
+            this.drut.DataPropertyName = "drut";
+            this.drut.HeaderText = "Drut";
+            this.drut.Name = "drut";
+            this.drut.ReadOnly = true;
+            this.drut.Width = 150;
+            // 
+            // dataPomiaru
+            // 
+            this.dataPomiaru.DataPropertyName = "dataPomiaru";
+            this.dataPomiaru.HeaderText = "Data Pomiaru";
+            this.dataPomiaru.Name = "dataPomiaru";
+            this.dataPomiaru.ReadOnly = true;
+            this.dataPomiaru.Width = 125;
+            // 
+            // iloscPunktow
+            // 
+            this.iloscPunktow.DataPropertyName = "iloscPunktow";
+            this.iloscPunktow.HeaderText = "Ilość Punktów";
+            this.iloscPunktow.Name = "iloscPunktow";
+            this.iloscPunktow.ReadOnly = true;
             // 
             // ListaPomiarowForm
             // 
@@ -394,15 +472,21 @@
         private System.Windows.Forms.DateTimePicker dtpStop;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Button btnDrukuj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proba;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sila;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ugiecie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Procent;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idKlient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProdukt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idSprezyna;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDrut;
         private System.Windows.Forms.DataGridViewTextBoxColumn klient;
         private System.Windows.Forms.DataGridViewTextBoxColumn produkt;
         private System.Windows.Forms.DataGridViewTextBoxColumn sprezyna;
         private System.Windows.Forms.DataGridViewTextBoxColumn drut;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataPomiaru;
         private System.Windows.Forms.DataGridViewTextBoxColumn iloscPunktow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proba;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sila;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ugiecie;
     }
 }

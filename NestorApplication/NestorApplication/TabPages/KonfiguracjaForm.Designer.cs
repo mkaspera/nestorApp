@@ -45,6 +45,9 @@
             this.cbPortCOM = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.labelSensorInfo = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbTimeoutPomiar = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbKonfiguracja
@@ -193,12 +196,40 @@
             this.labelSensorInfo.Size = new System.Drawing.Size(0, 13);
             this.labelSensorInfo.TabIndex = 19;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 186);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Timeout pomiaru:";
+            // 
+            // tbTimeoutPomiar
+            // 
+            this.tbTimeoutPomiar.Location = new System.Drawing.Point(124, 183);
+            this.tbTimeoutPomiar.Name = "tbTimeoutPomiar";
+            this.tbTimeoutPomiar.Size = new System.Drawing.Size(77, 20);
+            this.tbTimeoutPomiar.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(207, 186);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(77, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "(w sekundach)";
+            // 
             // KonfiguracjaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(477, 488);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.tbTimeoutPomiar);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.labelSensorInfo);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.cbPortCOM);
@@ -242,5 +273,8 @@
         private System.Windows.Forms.ComboBox cbPortCOM;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label labelSensorInfo;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbTimeoutPomiar;
+        private System.Windows.Forms.Label label10;
     }
 }

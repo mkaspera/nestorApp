@@ -1,4 +1,5 @@
 ﻿using NestorApplication.Common;
+using NestorApplication.Report;
 using NestorRepository;
 using NestorRepository.Entities;
 using System;
@@ -83,15 +84,49 @@ namespace NestorApplication.TabPages
         {
             if (dgvPomiarNaglowki.SelectedRows.Count > 0)
             {
-                int selectedRowIndex = dgvPomiarNaglowki.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dgvPomiarNaglowki.Rows[selectedRowIndex];
-                object idPomiar = selectedRow.Cells[0].Value;
-
+                object idPomiar = GetRowValue(0);
                 _dataTableDetails = DatabaseHelper.ReadDataTable(Pomiary.GetQueryDetails(idPomiar));
                 dgvPomiarSzczegoly.DataSource = _dataTableDetails;
 
                 DataGridViewHelper.SetGridProperties(dgvPomiarSzczegoly);
             }
+        }
+
+        private void btnDrukuj_Click(object sender, EventArgs e)
+        {
+            if (dgvPomiarNaglowki.SelectedRows.Count > 0)
+            {
+                int idKlient = int.Parse(GetRowValue(1));
+                int idProdukt = int.Parse(GetRowValue(2));
+                int idSprezyna = int.Parse(GetRowValue(3));
+                int idDrut = int.Parse(GetRowValue(4));
+
+                Klient klient = Klienci.GetKlient(idKlient, _mainForm.Klienci);
+                Produkt produkt = Produkty.GetProdukt(idProdukt, _mainForm.Produkty);
+                Sprezyna sprezyna = Sprezyny.GetSprezyna(idSprezyna, _mainForm.Sprezyny);
+                Drut drut = Druty.GetDrut(idDrut, _mainForm.Druty);
+
+                BindingSource bs = new BindingSource();
+                DataRowCollection rows = ((DataTable)dgvPomiarSzczegoly.DataSource).Rows;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    int proba = int.Parse(rows[i].ItemArray[0].ToString());
+                    double sila = double.Parse(rows[i].ItemArray[1].ToString());
+                    double ugiecie = double.Parse(rows[i].ItemArray[2].ToString());
+                    double procent = double.Parse(rows[i].ItemArray[3].ToString());
+
+                    bs.Add(new DanePomiaru { Próba = proba, Siła = sila, Ugięcie = ugiecie, Procent = procent });
+                }
+
+                PrintMeasure.Print(klient, produkt, sprezyna, drut, bs);
+            }
+        }
+
+        private string GetRowValue(int indx)
+        {
+            int selectedRowIndex = dgvPomiarNaglowki.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvPomiarNaglowki.Rows[selectedRowIndex];
+            return selectedRow.Cells[indx].Value.ToString();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace NestorApplication.TabPages
             tbSkalaTensometr.Text = _mainForm.ConfigurationParameter.SkalaTensometr;
             tbSkalaDroga.Text = _mainForm.ConfigurationParameter.SkalaDroga;
             tbCzuloscStart.Text = _mainForm.ConfigurationParameter.CzuloscStart;
+            tbTimeoutPomiar.Text = _mainForm.ConfigurationParameter.TimeoutPomiar;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace NestorApplication.TabPages
 
         private void btnZapisz_Click(object sender, EventArgs e)
         {
-            _mainForm.ConfigurationParameter.Save(cbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text);
+            _mainForm.ConfigurationParameter.Save(cbPortCOM.Text, tbBaudrate.Text, tbSkalaTensometr.Text, tbSkalaDroga.Text, tbCzuloscStart.Text, tbTimeoutPomiar.Text);
             MessageBox.Show("Pomyślnie zapisano parametry.", "Parametry konfiguracyjne");
         }
 

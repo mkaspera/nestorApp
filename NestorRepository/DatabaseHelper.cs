@@ -277,7 +277,7 @@ namespace NestorRepository
 
                     try
                     {
-                        command.CommandText = string.Format("INSERT INTO Pomiar (idKlient, idProdukt, idSprezyna, idDrut, data, iloscPunktowPomiarowych) VALUES({0},{1},{2},{3},'{4}',{5})", klient.Id, produkt.Id, sprezyna.Id, drut.Id, date, iloscPunktowPomiarowych);
+                        command.CommandText = string.Format("INSERT INTO Pomiar (idKlient, idProdukt, idSprezyna, idDrut, data, iloscPunktowPomiarowych) VALUES({0},{1},{2},{3},'{4}',{5})", klient.Id, produkt.Id, sprezyna.Id, drut.Id, date.ToString(Pomiary.DateTimeFormat), iloscPunktowPomiarowych);
                         command.ExecuteNonQuery();
 
                         command.CommandText = "SELECT last_insert_rowid()";
@@ -285,7 +285,7 @@ namespace NestorRepository
 
                         foreach (DanePomiaru pomiar in pomiary)
                         {
-                            command.CommandText = string.Format("INSERT INTO DanePomiaru (idPomiar, proba, sila, ugiecie) VALUES({0},{1},{2},{3})", idPomiar, pomiar.Próba, pomiar.Siła, pomiar.Ugięcie);
+                            command.CommandText = string.Format("INSERT INTO DanePomiaru (idPomiar, proba, sila, ugiecie, procent) VALUES({0},{1},{2},{3},{4})", idPomiar, pomiar.Próba, pomiar.Siła, pomiar.Ugięcie, pomiar.Procent);
                             command.ExecuteNonQuery();
                         }
                         transaction.Commit();

@@ -27,5 +27,10 @@ namespace NestorRepository
 
             return druty;
         }
+
+        public static Drut GetDrut(int id, List<Drut> druty)
+        {
+            return druty.Find(x => x.Id == id);
+        }
     }
 }
